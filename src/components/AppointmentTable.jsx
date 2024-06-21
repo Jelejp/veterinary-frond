@@ -6,7 +6,7 @@ const AppointmentTable = ({ setSelectedAppointment }) => {
 
     const handleSelectClick = (appointment) => {
         setSelectedAppointmentId(appointment.id);
-        setSelectedAppointment(`${appointment.date} a las ${appointment.time}`);
+        setSelectedAppointment(`${appointment.date} at ${appointment.time}`);
     };
 
     const handleCancelClick = () => {
@@ -15,7 +15,7 @@ const AppointmentTable = ({ setSelectedAppointment }) => {
     };
 
     return (
-        <table className="min-w-full bg-gray-300">
+        <table className="min-w-full bg-[#E0E0E0]">
             <thead>
                 <tr>
                     <th className="py-2 px-4 border-b border-gray-200">Date</th>
