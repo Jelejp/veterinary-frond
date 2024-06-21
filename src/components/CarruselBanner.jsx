@@ -18,10 +18,9 @@ const CarruselBanner = () => {
 
     const imgs = [
         "src/assets/carrusel1.jpg",
-        "src/assets/carrusel2.jpeg",
+        "src/assets/carrusel2.jpg",
         "src/assets/carrusel3.jpg",
-        "src/assets/carrusel4.jpg",
-        "src/assets/carrusel5.png"
+        "src/assets/carrusel4.jpg"
     ]
     return (
         <div>

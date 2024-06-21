@@ -1,11 +1,15 @@
 import React from 'react'
 import PublicNav from '../components/PublicNav'
+import MainLogin from '../components/MainLogin'
 
 const Login = () => {
     return (
-        <div>
+        <div className='w-full h-screen overflow-y-hidden'>
             <div>
                 <PublicNav />
+            </div>
+            <div >
+                <MainLogin/>
             </div>
         </div>
     )
