@@ -2,7 +2,7 @@
 export const services = [
     {
       name: 'General Enquiry',
-      image: 'src/assets/generalEnquiry.png', 
+      image: '/assets/generalEnquiry.png', 
       description: 'General consultation for check-ups and medical examinations of your pets.',
       requirements: 'None',
       price: 50.00,
@@ -10,7 +10,7 @@ export const services = [
     },
     {
       name: 'Vaccination',
-      image: 'src/assets/vaccination.png', 
+      image: '/assets/vaccination.png', 
       description: 'Complete vaccination to keep your pets protected against diseases.',
       requirements: 'Bring your vaccination card',
       price: 30.00,
@@ -18,7 +18,7 @@ export const services = [
     },
     {
       name: 'Surgery',
-      image: 'src/assets/surgery.png', 
+      image: '/assets/surgery.png', 
       description: 'Surgeries and surgical procedures with the best care.',
       requirements: 'Prior consultation',
       price: 200.00,
@@ -26,7 +26,7 @@ export const services = [
     },
     {
       name: 'Canine Hairdressing',
-      image: 'src/assets/canineHaird.png', 
+      image: '/assets/canineHaird.png', 
       description: 'Grooming service to keep your pet clean and healthy.',
       requirements: 'None',
       price: 40.00,
@@ -34,7 +34,7 @@ export const services = [
     },
     {
       name: 'Hospitalisation',
-      image: 'src/assets/hospitalisation.png', 
+      image: '/assets/hospitalisation.png', 
       description: 'Care and monitoring of pets requiring hospitalisation.',
       requirements: 'Consulta previa',
       price: 150.00,
@@ -43,7 +43,7 @@ export const services = [
     },
     {
         name: 'Deworming',
-        image: 'src/assets/deworming.png', 
+        image: '/assets/deworming.png', 
         description: 'Deworming service to eliminate internal and external parasites, keeping your pet healthy.',
         requirements: 'None',
         price: 25.00,

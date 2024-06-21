@@ -42,7 +42,7 @@
 }
 
 .article-bg {
-    background-image: url('src/assets/logi-img.png');
+    background-image: url('/assets/logi-img.png');
     background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
     background-position: center  ; /* Centra la imagen en el fondo */
 }
@@ -57,7 +57,7 @@
 }
 
 .article-bgg {
-    background-image: url('src/assets/register-img.png');
+    background-image: url('/assets/register-img.png');
     background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
     background-position: center  ; /* Centra la imagen en el fondo */
 }

@@ -3,7 +3,7 @@ import LinkTo from './LinkTo';
 import { Link } from 'react-router-dom';
 
 const LinksAuth = () => {
-    //cambiar iconos si es que ponemos
+    //cambiar iconos si es que ponemos y sacar src
     const activePage = {
         Services: "src/assets/register-active.png",
         Veterinary: "src/assets/login-active.png",

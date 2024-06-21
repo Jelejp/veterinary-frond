@@ -25,17 +25,17 @@ const MainLanding = () => {
                                 <div className="w-full md:w-1/2 lg:w-1/2 mt-4 md:mt-0 text-center">
                                     <div className="flex justify-between gap-12">
                                         <div className="flex flex-col items-center">
-                                            <img src="src/assets/huellita.png" alt="icono-Huellita" className="w-21 h-21 object-cover rounded-full mb-2 bg-[#FAE7D5]" />
+                                            <img src="/assets/huellita.png" alt="icono-Huellita" className="w-21 h-21 object-cover rounded-full mb-2 bg-[#FAE7D5]" />
                                             <h3>Veterinary</h3>
                                             <p className="text-sm text-center">Regular vet check-ups detect health issues early and keep your dog in optimal condition.</p>
                                         </div>
                                         <div className="flex flex-col items-center">
-                                            <img src="src/assets/social.png" alt="icono-Bathing" className="w-21 h-21 object-cover rounded-full bg-[#FAE7D5] mb-2" />
+                                            <img src="/assets/social.png" alt="icono-Bathing" className="w-21 h-21 object-cover rounded-full bg-[#FAE7D5] mb-2" />
                                             <h3>Bathing</h3>
                                             <p className="text-sm text-center">Regular baths improve your dog's appearance and enhance their health and comfort.</p>
                                         </div>
                                         <div className="flex flex-col items-center">
-                                            <img src="src/assets/rutina.png" alt="icono-Rutina" className="w-21 h-21 object-cover rounded-full mb-2 bg-[#FAE7D5]" />
+                                            <img src="/assets/rutina.png" alt="icono-Rutina" className="w-21 h-21 object-cover rounded-full mb-2 bg-[#FAE7D5]" />
                                             <h3>Exercise</h3>
                                             <p className="text-sm text-center">Daily walks are essential for your pet's physical and mental well-being.</p>
                                         </div>
@@ -47,7 +47,7 @@ const MainLanding = () => {
                 </div>
             </div>
             <div>
-                <Banner banner="src/assets/carrusel5.png" />
+                <Banner banner="/assets/carrusel5.png" />
             </div>
             <div className="max-w-7xl mx-auto px-4 py-8">
                 <div className="flex flex-wrap items-start">
@@ -65,17 +65,17 @@ const MainLanding = () => {
                                 <div className="w-full md:w-1/2 lg:w-1/2 mt-4 md:mt-0 text-center">
                                     <div className="flex justify-between gap-12">
                                         <div className="flex flex-col items-center">
-                                            <img src="src/assets/turnos.png" alt="icono-turnos" className="w-21 h-21 object-cover rounded-full mb-2 bg-[#FAE7D5]" />
+                                            <img src="/assets/turnos.png" alt="icono-turnos" className="w-21 h-21 object-cover rounded-full mb-2 bg-[#FAE7D5]" />
                                             <h3>Shifts</h3>
                                             <p className="text-sm text-center">Schedule your appointment and give your pet the care it deserves!</p>
                                         </div>
                                         <div className="flex flex-col items-center">
-                                            <img src="src/assets/haircut.png" alt="icono-Bathing" className="w-21 h-21 object-cover rounded-full bg-[#FAE7D5] mb-2" />
+                                            <img src="/assets/haircut.png" alt="icono-Bathing" className="w-21 h-21 object-cover rounded-full bg-[#FAE7D5] mb-2" />
                                             <h3>HairCut's</h3>
                                             <p className="text-sm text-center">We offer professional haircuts to keep your pet comfortable and well-groomed.</p>
                                         </div>
                                         <div className="flex flex-col items-center">
-                                            <img src="src/assets/maps.png" alt="icono-Rutina" className="w-21 h-21 object-cover rounded-full mb-2 bg-[#FAE7D5]" />
+                                            <img src="/assets/maps.png" alt="icono-Rutina" className="w-21 h-21 object-cover rounded-full mb-2 bg-[#FAE7D5]" />
                                             <h3>Find Us</h3>
                                             <p className="text-sm text-center">We are located in Buenos Aires, Capital Federal, in Paraguay 1919, Recoleta.</p>
                                         </div>
