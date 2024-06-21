@@ -110,7 +110,7 @@ const MainLogin = () => {
                     <h2 className='font-bold text-3xl'>New to VetNova?</h2>
                     <p className='text-center text-lg'>Sign Up at Our Clinic</p>
                     <p className='text-center text-lg'>Discover the benefits of being part of VetNova</p>
-                    <p className='text-center text-lg p-4'>Haven't an account? <Link className='text-blue-400' to={"/Register"}>Sign up here</Link></p>
+                    <p className='text-center text-lg p-4'>Haven't an account? <Link className='text-blue-800' to={"/Register"}>Sign up here</Link></p>
                 </div>
             </article>
             <ToastContainer />

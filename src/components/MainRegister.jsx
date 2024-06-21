@@ -120,7 +120,7 @@ const MainRegister = () => {
                 <div className='article-content text-white flex flex-col gap-8 justify-center items-center h-full'>
                     <h2 className='text-3xl'>Already have an account?</h2>
                     <p className='text-center text-lg'>Login with your account</p>
-                    <Link className='text-blue-400 mb-5' to={"/Login"}>Log in</Link>
+                    <Link className='text-blue-800 mb-5' to={"/Login"}>Log in</Link>
                 </div>
             </article>
             <article className='text-center md:w-1/2 lg:w-1/2 h-full flex flex-col justify-center'>
