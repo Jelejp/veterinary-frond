@@ -16,8 +16,8 @@ const AppointmenClientTable = ({ appointments, cancelAppointment }) => {
 
     return (
         <div className="mb-6">
-            <table className="min-w-full divide-y divide-gray-200 mt-2">
-                <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-gray-200 mt-3">
+                <thead className="bg-[#FAE7D5]">
                     <tr>
                         <th className="py-2 px-4">Date</th>
                         <th className="py-2 px-4">Time</th>
@@ -25,7 +25,7 @@ const AppointmenClientTable = ({ appointments, cancelAppointment }) => {
                         <th className="py-2 px-4">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white divide-y divide-[#FAE7D5]">
                     {appointments.map((appointment) => (
                         <tr key={appointment.id}>
                             <td className="py-2 px-4 text-center">{appointment.date}</td>

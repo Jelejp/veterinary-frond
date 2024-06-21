@@ -2,45 +2,51 @@
 export const services = [
     {
       name: 'General Enquiry',
-      image: 'https://via.placeholder.com/400x200', 
+      image: 'src/assets/generalEnquiry.png', 
       description: 'General consultation for check-ups and medical examinations of your pets.',
       requirements: 'None',
-      price: 50.00
+      price: 50.00,
+      attendedBy: 'Pepito Perez'
     },
     {
       name: 'Vaccination',
-      image: 'https://via.placeholder.com/400x200', 
+      image: 'src/assets/vaccination.png', 
       description: 'Complete vaccination to keep your pets protected against diseases.',
       requirements: 'Bring your vaccination card',
-      price: 30.00
+      price: 30.00,
+      attendedBy: 'Pepito Perez'
     },
     {
       name: 'Surgery',
-      image: 'https://via.placeholder.com/400x200', 
+      image: 'src/assets/surgery.png', 
       description: 'Surgeries and surgical procedures with the best care.',
       requirements: 'Prior consultation',
-      price: 200.00
+      price: 200.00,
+      attendedBy: 'Pepito Perez'
     },
     {
       name: 'Canine Hairdressing',
-      image: 'https://via.placeholder.com/400x200', 
+      image: 'src/assets/canineHaird.png', 
       description: 'Grooming service to keep your pet clean and healthy.',
       requirements: 'None',
-      price: 40.00
+      price: 40.00,
+      attendedBy: 'Pepita Lopez'
     },
     {
       name: 'Hospitalisation',
-      image: 'https://via.placeholder.com/400x200', 
+      image: 'src/assets/hospitalisation.png', 
       description: 'Care and monitoring of pets requiring hospitalisation.',
       requirements: 'Consulta previa',
-      price: 150.00
+      price: 150.00,
+      attendedBy: 'Pepito Perez'
 
     },
     {
         name: 'Deworming',
-        image: 'https://via.placeholder.com/400x200', 
+        image: 'src/assets/deworming.png', 
         description: 'Deworming service to eliminate internal and external parasites, keeping your pet healthy.',
         requirements: 'None',
-        price: 25.00
+        price: 25.00,
+        attendedBy: 'Pepito Perez'
     }    
   ];

@@ -3,7 +3,7 @@ import React from 'react';
 const FooterAuth = () => {
     return (
         <>
-                <footer className='bg-[#000000] shadow-sm  p-3 flex justify-center items-center'>
+                <footer className='bg-[#8BA8C4] shadow-sm  p-3 flex justify-center items-center h-[9vh]'>
             
             <p className='text-white pr-5'> &copy;  2024 Veterinary. All rights reserved.</p>
              
