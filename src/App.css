@@ -41,3 +41,32 @@
     user-select: none;
 }
 
+.article-bg {
+    background-image: url('src/assets/logi-img.png');
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+    background-position: center  ; /* Centra la imagen en el fondo */
+}
+
+.article-content {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.article-bgg {
+    background-image: url('src/assets/register-img.png');
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+    background-position: center  ; /* Centra la imagen en el fondo */
+}
+
+.article-content {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
