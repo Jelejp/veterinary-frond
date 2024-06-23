@@ -14,7 +14,7 @@ const ServiceDetails = () => {
 
     const handleReserveClick = () => {
         Swal.fire({
-            title: `Your turn for Canine Hairdressing was correctly booked for ${selectedAppointment}.`,
+            title: `Your turn for ${service.name} was correctly booked for ${selectedAppointment}.`,
             icon: "success"
         });
         //aca podriamos crear la factura
@@ -31,16 +31,13 @@ const ServiceDetails = () => {
                             alt={service.name}
                             className="w-full h-64 object-cover rounded-lg mb-6"
                         />
-                        <h1 className="text-3xl font-bold text-green-700 mb-4">{service.name}</h1>
+                        <h1 className="text-3xl font-bold text-[#5aa6ec] mb-4">{service.name}</h1>
                         <p className="text-lg text-gray-700 mb-4">{service.description}</p>
-                        <ul className="list-disc pl-4">
-
-                        </ul>
                         <p className="text-lg text-gray-700 mb-4 mt-3">Requirements: {service.requirements}</p>
-                        <h2 className="text-2xl font-bold text-green-700 mb-2">Price: ${service.price.toFixed(2)}</h2>
-                        <h3 className="text-xl font-bold text-green-700 mb-4">Attended by: {service.attendedBy}</h3>
+                        <h2 className="text-2xl font-bold text-[#5aa6ec] mb-2">Price: ${service.price.toFixed(2)}</h2>
+                        <h3 className="text-xl font-bold text-[#5aa6ec] mb-4">Attended by: {service.attendedBy}</h3>
 
-                        <h3 className="text-xl font-bold text-green-700 mb-4">Available Shifts</h3>
+                        <h3 className="text-xl font-bold text-[#5aa6ec] mb-4">Available Shifts</h3>
                         <AppointmentTable setSelectedAppointment={setSelectedAppointment} />
 
                         {selectedAppointment && (

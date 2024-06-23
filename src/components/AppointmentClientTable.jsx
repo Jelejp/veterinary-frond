@@ -16,7 +16,7 @@ const AppointmenClientTable = ({ appointments, cancelAppointment }) => {
 
     return (
         <div className="mb-6">
-            <table className="min-w-full divide-y divide-gray-200 mt-3">
+            <table className="min-w-full divide-y divide-gray-200 mt-3 sm:w-[90px]">
                 <thead className="bg-[#FAE7D5]">
                     <tr>
                         <th className="py-2 px-4">Date</th>
