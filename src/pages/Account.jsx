@@ -3,6 +3,8 @@ import ClientInfo from '../components/ClientInfo';
 import PetCard from '../components/PetCard';
 import InvoiceTable from '../components/InvoiceTable';
 import AppointmenClientTable from '../components/AppointmentClientTable';
+import AuthLayout from '../layout/AuthLayout';
+import Swal from 'sweetalert2';
 
 const Account = () => {
     const [client, setClient] = useState({
@@ -26,18 +28,37 @@ const Account = () => {
     });
 
     const cancelAppointment = (id) => {
-        setClient((prevClient) => ({
-            ...prevClient,
-            appointments: prevClient.appointments.map((appointment) =>
-                appointment.id === id ? { ...appointment, status: 'Cancelled' } : appointment
-            ),
-        }));
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, cancel it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setClient((prevClient) => ({
+                    ...prevClient,
+                    appointments: prevClient.appointments.map((appointment) =>
+                        appointment.id === id ? { ...appointment, status: 'Cancelled' } : appointment
+                    ),
+                }));
+                Swal.fire({
+                    title: 'Cancelled!',
+                    text: 'Your appointment has been cancelled.',
+                    icon: 'success'
+                });
+            }
+        });
     };
 
     return (
+        <>
+        <AuthLayout>
         <div className="container mx-auto px-4 py-8">
             <div className="bg-white rounded-lg shadow-lg p-6">
-                <h1 className="text-3xl font-bold text-green-700 mb-4">Account Details</h1>
+                <h1 className="text-3xl font-bold text-[#6ca8e0] mb-4">Account Details</h1>
                 <ClientInfo client={client} />
 
                 <div className="mb-6">
@@ -48,12 +69,17 @@ const Account = () => {
                         ))}
                     </div>
                 </div>
+                <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Invoices</h1>
 
                 <InvoiceTable invoices={client.invoices} />
 
+                <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Appointments</h1>
                 <AppointmenClientTable appointments={client.appointments} cancelAppointment={cancelAppointment} />
             </div>
         </div>
+
+        </AuthLayout>
+        </>
     );
 };
 
