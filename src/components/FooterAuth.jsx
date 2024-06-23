@@ -8,9 +8,9 @@ const FooterAuth = () => {
             <p className='text-white pr-5'> &copy;  2024 Veterinary. All rights reserved.</p>
              
             <div className='text-white flex gap-3 '>
-                <img src="/assets/icon-github.png" alt="icon-github" />
-                <img src="/assets/icon-instagram.png" alt="icon-instagram" />
-                <img src="/assets/icon-x.png" alt="icon-x" />
+                <a href="https://github.com/Jelejp/veterinary-frond.git"><img className='w-[30px]' src="/assets/icon-github.png" alt="icon github" /></a>
+                <a href="https://www.instagram.com"><img className ='w-[30px]' src="/assets/icon-instagram.png" alt="icon instagram" /></a>
+                <a href="https://www.x.com"><img className='w-[30px]' src="/assets/icon-x.png" alt="icon x" /></a>
             </div>
         </footer>
         </>

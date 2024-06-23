@@ -69,9 +69,11 @@ const Account = () => {
                         ))}
                     </div>
                 </div>
+                <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Invoices</h1>
 
                 <InvoiceTable invoices={client.invoices} />
 
+                <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Appointments</h1>
                 <AppointmenClientTable appointments={client.appointments} cancelAppointment={cancelAppointment} />
             </div>
         </div>
