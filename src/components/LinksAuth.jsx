@@ -3,19 +3,21 @@ import LinkTo from './LinkTo';
 
 const LinksAuth = () => {
     const activePage = {
-        Services: "src/assets/register-active.png",
-        Veterinary: "src/assets/login-active.png",
-        Account: "src/assets/home-active.png"
+        Services: "/assets/services-active.png",
+        Veterinary: "/assets/veterinary-active.png",
+        Account: "/assets/user-active.png",
+        Logout: "/assets/logout-active.png" 
     };
 
     const links = [
-        { text: "Services", to: "/auth/services", img: "src/assets/home.png", activeIcon: activePage.Services },
-        { text: "Veterinary", to: "/auth/veterinary", img: "src/assets/register.png", activeIcon: activePage.Veterinary },
-        { text: "Account", to: "/auth/account", img: "src/assets/login.png", activeIcon: activePage.Account },
+        { text: "Services", to: "/auth/services", img: "/assets/services.png", activeIcon: activePage.Services },
+        { text: "Veterinary", to: "/auth/veterinary", img: "/assets/veterinary.png", activeIcon: activePage.Veterinary },
+        { text: "Account", to: "/auth/account", img: "/assets/user.png", activeIcon: activePage.Account },
+        { text: "Logout", to: "/", img: "/assets/logout.png", activeIcon: activePage.Logout },
     ];
 
     return (
-        <div className='flex flex-col md:flex-row justify-center items-center w-full h-full  md:pt-0'>
+        <div className='flex flex-col md:flex-row justify-center items-center w-full h-full  '>
             {links.map((anchor, id) => (
                 <a
                     key={id}
@@ -30,9 +32,9 @@ const LinksAuth = () => {
                     />
                 </a>
             ))}
-            <a href="/" className="w-full md:w-auto text-red-500 font-bold hover:text-red-700 text-center md:pl-3 md:py-0">
+            {/* <a href="/" className="w-full md:w-auto text-red-500 font-bold hover:text-red-700 text-center md:pl-3 md:py-0">
                 Logout
-            </a>
+            </a> */}
         </div>
     );
 };
