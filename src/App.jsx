@@ -8,6 +8,7 @@ import Login from './pages/Login'
 import Services from './pages/Services'
 import Account from './pages/Account'
 import ServiceDetails from './pages/ServiceDetails'
+import Veterinary from './pages/Veterinary'
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
         <Route path='/auth/services' element={<Services />} />
         <Route path="auth/service/:name" element={<ServiceDetails />} />
         <Route path='/auth/account' element={<Account />} />
-
+        <Route path='/auth/Veterinary' element={<Veterinary />} />
       </Routes>
     </BrowserRouter>
   )
