@@ -1,20 +1,16 @@
-import React from 'react';
+import React from 'react'
+import SocialMedia from './SocialMedia'
 
 const FooterAuth = () => {
     return (
         <>
-                <footer className='bg-[#8BA8C4] shadow-sm  p-3 flex justify-center items-center h-[9vh]'>
-            
-            <p className='text-white pr-5'> &copy;  2024 Veterinary. All rights reserved.</p>
-             
-            <div className='text-white flex gap-3 '>
-                <a href="https://github.com/Jelejp/veterinary-frond.git"><img className='w-[30px]' src="/assets/icon-github.png" alt="icon github" /></a>
-                <a href="https://www.instagram.com"><img className ='w-[30px]' src="/assets/icon-instagram.png" alt="icon instagram" /></a>
-                <a href="https://www.x.com"><img className='w-[30px]' src="/assets/icon-x.png" alt="icon x" /></a>
-            </div>
-        </footer>
+            <footer className="flex gap-3 bg-[#8BA8C4] font-bold text-white justify-around items-center flex-col md:flex-row lg:flex-row">
+                <small className="text-xs">Cohort54</small>
+                <small className="text-xs"> &#169; 2024 VetNova. All rights reserved.</small>
+                <SocialMedia />
+            </footer>
         </>
     );
 };
 
-export default FooterAuth;
+export default FooterAuth
