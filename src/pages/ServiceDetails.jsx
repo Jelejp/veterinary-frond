@@ -4,6 +4,7 @@ import AuthLayount from '../layout/AuthLayout.jsx';
 import Swal from 'sweetalert2';
 import { services } from '../utils/serviceList';
 import { useParams } from 'react-router-dom';
+import ChatbotAuth from '../ChatBotAuth.jsx';
 
 
 const ServiceDetails = () => {
@@ -50,6 +51,7 @@ const ServiceDetails = () => {
                             </div>
                         )}
                     </div>
+                    <ChatbotAuth/>
                 </div>
             </AuthLayount>
         </>

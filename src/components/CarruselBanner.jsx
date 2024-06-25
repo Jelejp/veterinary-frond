@@ -15,12 +15,12 @@ const CarruselBanner = () => {
         autoplaySpeed: 3000,
         arrows: true
     }
-
+    
     const imgs = [
-        "/assets/carrusel1.jpg",
+        "/assets/carrusel4.png",
         "/assets/carrusel2.jpg",
         "/assets/carrusel3.jpg",
-        "/assets/carrusel4.jpg"
+        "/assets/carrusel1.jpg"
     ]
     return (
         <div>

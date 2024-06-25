@@ -2,6 +2,7 @@ import React from 'react'
 import PublicNav from '../components/PublicNav'
 import PublicFooter from '../components/PublicFooter'
 import MainLanding from '../components/MainLanding'
+import Chatbot from '../chatbot'
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             </div>
             <div>
             <MainLanding/>
+            <Chatbot/>
             </div>
             <div>
                 <PublicFooter/>
