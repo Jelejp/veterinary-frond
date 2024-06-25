@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .btn-xxl, .btn-wide {
     padding-right: 45px;
     padding-left: 45px;
@@ -43,8 +41,8 @@
 
 .article-bg {
     background-image: url('/assets/logi-img.png');
-    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
-    background-position: center  ; /* Centra la imagen en el fondo */
+    background-size: cover;
+    background-position: center;
 }
 
 .article-content {
@@ -58,8 +56,8 @@
 
 .article-bgg {
     background-image: url('/assets/register-img.png');
-    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
-    background-position: center  ; /* Centra la imagen en el fondo */
+    background-size: cover;
+    background-position: center;
 }
 
 .article-content {
@@ -69,16 +67,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border: 1px solid red;
-} */
-
+}
 
 .card {
     width: fit-content;
@@ -86,15 +75,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* padding: 15px 15px; */
-    /* gap: 20px; */
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
-  }
-  
-  /* for all social containers*/
-  .socialContainer {
-    /* width: 52px;
-    height: 52px; */
+}
+
+.socialContainer {
     border-radius: 50%;
     background-color: #E0E0E0;
     display: flex;
@@ -102,60 +86,118 @@
     justify-content: center;
     overflow: hidden;
     transition-duration: .3s;
-  }
-  /* instagram*/
-  .containerOne:hover {
+}
+
+.containerOne:hover {
     background-color: #d62976;
     transition-duration: .3s;
-  }
-  /* twitter*/
-  .containerTwo:hover {
+}
+
+.containerTwo:hover {
     background-color: #00acee;
     transition-duration: .3s;
-  }
-  /* linkdin*/
-  .containerThree:hover {
+}
+
+.containerThree:hover {
     background-color: #0072b1;
     transition-duration: .3s;
-  }
-  
-  /* GitHub */
-  .containerFive:hover {
+}
+
+.containerFive:hover {
     background-color: #d10c0c;
     transition-duration: .3s;
-  }
-  
-  /* Discord */
-  .containerSix:hover {
+}
+
+.containerSix:hover {
     background-color: #7289da;
     transition-duration: .3s;
-  }
-  
-  .socialContainer:active {
+}
+
+.socialContainer:active {
     transform: scale(0.9);
     transition-duration: .3s;
-  }
-  
-  .socialSvg {
+}
+
+.socialSvg {
     width: 17px;
-  }
-  
-  .socialSvg path {
+}
+
+.socialSvg path {
     fill: rgb(255, 255, 255);
-  }
-  
-  .socialContainer:hover .socialSvg {
+}
+
+.socialContainer:hover .socialSvg {
     animation: slide-in-top 0.3s both;
-  }
-  
-  @keyframes slide-in-top {
+}
+
+@keyframes slide-in-top {
     0% {
-      transform: translateY(-50px);
-      opacity: 0;
+        transform: translateY(-50px);
+        opacity: 0;
     }
-  
     100% {
-      transform: translateY(0);
-      opacity: 1;
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
+}
+
+.App {
+    text-align: center;
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.fixed-chatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.chatbot-button {
+    background-color: #00B2A9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.chatbot-button:hover {
+    background-color: #008b80;
+}
+
+.chatbot-container {
+    position: relative;
+    width: 350px;
+    max-width: 100%;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.close-button:hover {
+  color: #ff0000;
+}

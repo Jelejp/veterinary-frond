@@ -4,7 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import '../utils/phone.js'
+import {isValidPhoneNumber} from '../utils/phone.js'
 
 const MainRegister = () => {
     const [firstName, setFirstName] = useState('')
@@ -31,6 +31,10 @@ const MainRegister = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        console.log(email)
+        console.log(email)
+        console.log(email)
+                console.log(email)
 
 
         if (!passwordValid) {
@@ -65,10 +69,10 @@ const MainRegister = () => {
         setIsLoading(true)
 
 
-        const registerDTO = { firstName, lastName, phoneNumber, email, password };
-
+        const registerDTO = { firstName: firstName, lastName: lastName,  email: email, password: password, phone: phoneNumber }
+        console.log(registerDTO)
         try {
-            const response = await axios.post('', registerDTO);
+            const response = await axios.post('http://localhost:8080/api-veterinary/register', registerDTO);
             if (response.status === 201) {
                 toast.success('Account created successfully', {
                     position: "top-center",
@@ -82,7 +86,7 @@ const MainRegister = () => {
                     transition: Bounce
                 })
                 setTimeout(() => {
-                    navigate('/');
+                    navigate('/auth/account');
                 }, 2000)
             } else {
                 toast.error('An account with this email address already exists.', {
