@@ -19,7 +19,7 @@ function App() {
         <Route path='/Register' element={<Register />} />
         <Route path='/Login' element={<Login />} />
         <Route path='/auth/services' element={<Services />} />
-        <Route path="auth/service/:name" element={<ServiceDetails />} />
+        <Route path="/auth/service/:id" element={<ServiceDetails />} />
         <Route path='/auth/account' element={<Account />} />
         <Route path='/auth/Veterinary' element={<Veterinary />} />
       </Routes>

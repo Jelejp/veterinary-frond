@@ -1,7 +1,5 @@
 import React from 'react';
 import CardService from '../components/CardService';
-import HeaderAuth from '../components/HeaderAuth';
-import FooterAuth from '../components/FooterAuth';
 import AuthLayout from '../layout/AuthLayout';
 import ChatbotAuth from '../ChatBotAuth';
 
