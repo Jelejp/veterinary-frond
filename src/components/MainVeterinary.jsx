@@ -8,7 +8,7 @@ const MainVeterinary = () => {
     return (
         <div>
             <div>
-                <picture className=" object-cover text-center">
+                <picture className="object-cover text-center">
                     <img className='w-full h-[400px] text-center' src="/assets/banner-veterinario.jpeg" alt="Banner Veterinariam" />
                 </picture>
             </div>
@@ -17,7 +17,7 @@ const MainVeterinary = () => {
                     {veterinarians.map((vet) => (
                         <div
                             key={vet.name}
-                            className="bg-[#ffe2c8] hover:bg-[#FAE7D5] rounded-lg shadow-md p-4 flex flex-col justify-between w-2/5"
+                            className="bg-[#ffe2c8] hover:bg-[#FAE7D5] rounded-lg shadow-md p-4 flex flex-col justify-between w-full md:w-2/5"
                             style={{ maxWidth: '400px' }}
                         >
                             <img
@@ -33,7 +33,6 @@ const MainVeterinary = () => {
                         </div>
                     ))}
                 </div>
-
             </div>
         </div>
     )
