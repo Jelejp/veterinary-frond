@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AppointmenClientTable = ({ appointments, cancelAppointment }) => {
+const AppointmentClientTable = ({ appointments, cancelAppointment }) => {
     const getStatusColor = (status) => {
-        switch (status) {
+        switch (status.toLowerCase()) {
             case 'cancelled':
                 return 'text-red-500';
-            case 'active':
+            case 'confirmed':
                 return 'text-green-500';
             case 'pending':
                 return 'text-yellow-500';
@@ -28,13 +28,13 @@ const AppointmenClientTable = ({ appointments, cancelAppointment }) => {
                 <tbody className="bg-white divide-y divide-[#FAE7D5]">
                     {appointments.map((appointment) => (
                         <tr key={appointment.id}>
-                            <td className="py-2 px-4 text-center">{appointment.date}</td>
-                            <td className="py-2 px-4 text-center">{appointment.time}</td>
-                            <td className={`py-2 px-4 text-center ${getStatusColor(appointment.status)}`}>
-                                {appointment.status}
+                            <td className="py-2 px-4 text-center">{new Date(appointment.dateTime).toLocaleDateString()}</td>
+                            <td className="py-2 px-4 text-center">{new Date(appointment.dateTime).toLocaleTimeString()}</td>
+                            <td className={`py-2 px-4 text-center ${getStatusColor(appointment.appointmentStatus)}`}>
+                                {appointment.appointmentStatus}
                             </td>
                             <td className="py-2 px-4 text-center">
-                                {appointment.status === 'Active' && (
+                                {appointment.appointmentStatus === 'CONFIRMED' && (
                                     <button
                                         onClick={() => cancelAppointment(appointment.id)}
                                         className="text-red-500 hover:text-red-700 font-bold">
@@ -50,4 +50,4 @@ const AppointmenClientTable = ({ appointments, cancelAppointment }) => {
     );
 };
 
-export default AppointmenClientTable;
+export default AppointmentClientTable;
