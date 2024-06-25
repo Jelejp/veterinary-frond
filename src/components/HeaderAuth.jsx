@@ -10,7 +10,7 @@ const HeaderAuth = () => {
 
     return (
         <>
-            <header className='bg-[#8BA8C4] gap-8 py-1 flex justify-between md:flex md:justify-around items-center px-4 md:px-10 lg:px-20 h-[15vh]'>
+            <header className='bg-[#8BA8C4] gap-8 py-1 flex justify-between md:flex md:justify-between items-center px-4 md:px-10 lg:px-20 h-[15vh]'>
                 <div className='flex items-center'>
                     <picture className='flex gap-2 lg:gap-3 items-center'>
                         <img className='w-8 md:w-20' src="/assets/icono-VetNova.png" alt="logo" />

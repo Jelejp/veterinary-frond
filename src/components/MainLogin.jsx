@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/actions/authActions'
-import { useState } from 'react'
 import axios from 'axios'
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
@@ -41,6 +40,7 @@ const MainLogin = () => {
             transition: Bounce,
         });
     }
+
     const handleLogin = async () => {
         setLoading(true)
         const user = {
@@ -48,9 +48,15 @@ const MainLogin = () => {
             password: password
         }
         try {
-            console.log(user)
+
             const response = await axios.post('http://localhost:8080/api-veterinary/login', user);
             let token = response.data
+
+            // Guardar el token en localStorage
+            localStorage.setItem('token', token);
+
+            // Obtener información adicional del cliente
+
 
             const responseCurrentClient = await axios.get("http://localhost:8080/api-veterinary/current", {
                 headers: {
@@ -63,11 +69,13 @@ const MainLogin = () => {
 
             console.log(client);
             dispatch(login(client))
+
             navigate("/auth/account")
+
             mensajeSuccess()
         } catch (error) {
             console.error('Error:', error)
-            toast.error(mensajeError)
+            mensajeError();
         } finally {
             setLoading(false)
         }
@@ -80,8 +88,6 @@ const MainLogin = () => {
     const handlePasswordChange = (event) => {
         setPassword(event.target.value)
     }
-
-    
 
     return (
         <div className='flex flex-col md:flex-row h-[100vh] lg:h-[100vh] md:h-[100vh] overflow-y-auto '>
