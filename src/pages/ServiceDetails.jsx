@@ -3,7 +3,14 @@ import { useParams } from 'react-router-dom';
 import AppointmentTable from '../components/AppointmentTable';
 import AuthLayout from '../layout/AuthLayout';
 import Swal from 'sweetalert2';
+
 import axios from 'axios';
+
+import { services } from '../utils/serviceList';
+import { useParams } from 'react-router-dom';
+import ChatbotAuth from '../ChatBotAuth.jsx';
+
+
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -47,6 +54,7 @@ const ServiceDetails = () => {
         setLoading(false);
       }
     };
+
 
     fetchServiceDetails();
   }, [id]);
@@ -100,6 +108,7 @@ const ServiceDetails = () => {
       </div>
     </AuthLayout>
   );
+
 };
 
 export default ServiceDetails;

@@ -48,6 +48,7 @@ const MainLogin = () => {
             password: password
         }
         try {
+
             const response = await axios.post('http://localhost:8080/api-veterinary/login', user);
             let token = response.data
 
@@ -55,6 +56,8 @@ const MainLogin = () => {
             localStorage.setItem('token', token);
 
             // Obtener información adicional del cliente
+
+
             const responseCurrentClient = await axios.get("http://localhost:8080/api-veterinary/current", {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -66,7 +69,9 @@ const MainLogin = () => {
 
             console.log(client);
             dispatch(login(client))
-            navigate("/auth/services")
+
+            navigate("/auth/account")
+
             mensajeSuccess()
         } catch (error) {
             console.error('Error:', error)

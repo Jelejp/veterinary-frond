@@ -6,7 +6,11 @@ import InvoiceTable from '../components/InvoiceTable';
 import AppointmentClientTable from '../components/AppointmentClientTable';
 import AuthLayout from '../layout/AuthLayout';
 import Swal from 'sweetalert2';
+
 import AddPetModal from '../components/AddPetModal';
+=======
+import ChatbotAuth from '../ChatBotAuth';
+
 
 const Account = () => {
     const [client, setClient] = useState(null);
@@ -74,6 +78,7 @@ const Account = () => {
     }
 
     return (
+
         <AuthLayout>
             <div className="container mx-auto px-4 py-8">
                 <div className="bg-white rounded-lg shadow-lg p-6">
@@ -98,6 +103,7 @@ const Account = () => {
                 </div>
             </div>
         </AuthLayout>
+
     );
 };
 
