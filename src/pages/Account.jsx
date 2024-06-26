@@ -8,10 +8,7 @@ import AuthLayout from '../layout/AuthLayout';
 import Swal from 'sweetalert2';
 
 import AddPetModal from '../components/AddPetModal';
-<<<<<<< HEAD
-=======
 
->>>>>>> dev
 import ChatbotAuth from '../ChatBotAuth';
 
 
