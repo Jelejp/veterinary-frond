@@ -4,6 +4,8 @@ import AppointmentTable from '../components/AppointmentTable';
 import AuthLayout from '../layout/AuthLayout';
 import Swal from 'sweetalert2';
 
+import { useSelector } from 'react-redux';
+
 import axios from 'axios';
 
 import { services } from '../utils/serviceList';
@@ -18,12 +20,12 @@ const ServiceDetails = () => {
   const [selectedPetId, setSelectedPetId] = useState(null);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [loading, setLoading] = useState(true);
+  // const token = useSelector(store => store.authReducer.token)
 
   useEffect(() => {
     const fetchServiceDetails = async () => {
-      const token = useSelector(store => store.authReducer.token)
       try {
-        // const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         if (!token) {
           throw new Error("No token found in localStorage");
         }
