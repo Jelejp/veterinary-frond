@@ -3,22 +3,15 @@ import { useParams } from 'react-router-dom';
 import AppointmentTable from '../components/AppointmentTable';
 import AuthLayout from '../layout/AuthLayout';
 import Swal from 'sweetalert2';
-
 import axios from 'axios';
-
-import { services } from '../utils/serviceList';
-import { useParams } from 'react-router-dom';
-import ChatbotAuth from '../ChatBotAuth.jsx';
-
-
 
 const ServiceDetails = () => {
   const { id } = useParams();
   const [service, setService] = useState(null);
   const [pets, setPets] = useState([]);
-  const [selectedPetId, setSelectedPetId] = useState(null);
-  const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [selectedPet, setSelectedPet] = useState(null);
+  const [calculatedPrice, setCalculatedPrice] = useState(null);
+  const [additionalChargeMessage, setAdditionalChargeMessage] = useState('');
 
   useEffect(() => {
     const fetchServiceDetails = async () => {
@@ -42,6 +35,8 @@ const ServiceDetails = () => {
 
         setService(serviceResponse.data);
         setPets(clientResponse.data.pets);
+        setCalculatedPrice(serviceResponse.data.price);
+
       } catch (error) {
         console.error("Error fetching data:", error);
         Swal.fire({
@@ -50,32 +45,53 @@ const ServiceDetails = () => {
           icon: 'error',
           confirmButtonText: 'Ok'
         });
-      } finally {
-        setLoading(false);
       }
     };
-
 
     fetchServiceDetails();
   }, [id]);
 
-  const handlePetChange = (event) => {
-    setSelectedPetId(event.target.value);
+  const calculatePrice = (petSize) => {
+    const basePrice = service.price;
+    let additionalCharge = 0;
+
+    switch (petSize) {
+      case 'SMALL':
+        additionalCharge = 0;
+        break;
+      case 'MEDIUM':
+        additionalCharge = 10;
+        break;
+      case 'LARGE':
+        additionalCharge = 20;
+        break;
+      case 'BIGGER':
+        additionalCharge = 30;
+        break;
+      default:
+        break;
+    }
+
+    return basePrice + additionalCharge;
   };
 
-  const handleReserveClick = () => {
-    Swal.fire({
-      title: `Your turn for ${service.name} was correctly booked for ${selectedAppointment}.`,
-      icon: "success"
-    });
-  };
+  const handlePetChange = (petId) => {
+    const selectedPet = pets.find(pet => pet.id === parseInt(petId, 10));
+    if (selectedPet) {
+      setSelectedPet(selectedPet);
+      const updatedPrice = calculatePrice(selectedPet.animalSize);
+      setCalculatedPrice(updatedPrice);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+      if (selectedPet.animalSize !== 'SMALL') {
+        setAdditionalChargeMessage(`Please note that additional charges apply based on the size of your pet. The updated price is $${updatedPrice.toLocaleString()}.`);
+      } else {
+        setAdditionalChargeMessage('');
+      }
+    }
+  };
 
   if (!service) {
-    return <div>No service found.</div>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -90,25 +106,25 @@ const ServiceDetails = () => {
           <h1 className="text-3xl font-bold text-[#5aa6ec] mb-4">{service.name}</h1>
           <p className="text-lg text-gray-700 mb-4">{service.description}</p>
           <p className="text-lg text-gray-700 mb-4 mt-3">Requirements: {service.requirements}</p>
-          <h2 className="text-2xl font-bold text-[#5aa6ec] mb-2">Price: ${service.price.toFixed(2)}</h2>
-          <h3 className="text-xl font-bold text-[#5aa6ec] mb-4">Attended by: {service.attendedBy}</h3>
+          <h3 className="text-xl font-bold text-[#5aa6ec] mb-2">Attended by: {service.attendedBy}</h3>
+          <h2 className="text-2xl font-bold text-[#5aa6ec] mb-2">Price: ${calculatedPrice ? calculatedPrice.toLocaleString() : service.price.toLocaleString()}</h2>
 
-          <AppointmentTable setSelectedAppointment={setSelectedAppointment} serviceId={service.id} petId={selectedPetId} pets={pets} />
-
-          {selectedAppointment && (
-            <div className="mt-4">
-              <button
-                onClick={handleReserveClick}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Book an appointment
-              </button>
-            </div>
+          {additionalChargeMessage && (
+            <p className="text-red-500 mb-4">{additionalChargeMessage}</p>
           )}
+
+          <h2 className="text-xl font-bold text-[#5aa6ec] mt-3">Book your appointment:</h2>
+          <AppointmentTable
+            setSelectedAppointment={(dateTime) => setSelectedAppointment(dateTime)}
+            serviceId={service.id}
+            serviceName={service.name}
+            pets={pets}
+            handlePetChange={handlePetChange}
+          />
         </div>
       </div>
     </AuthLayout>
   );
-
 };
 
 export default ServiceDetails;

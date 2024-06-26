@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Select } from '@chakra-ui/react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const AppointmentTable = ({ setSelectedAppointment, serviceId, petId, pets }) => {
+const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets, handlePetChange }) => {
   const [dateTime, setDateTime] = useState('');
   const [description, setDescription] = useState('');
+  const [selectedPetId, setSelectedPetId] = useState('');
+
+  const formatDateTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    const formattedDate = date.toLocaleDateString();
+    const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return `${formattedDate} at ${formattedTime}`;
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -14,7 +22,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, petId, pets }) =>
       dateTime,
       description,
       status: 'SCHEDULED',
-      petId: parseInt(petId, 10),
+      petId: parseInt(selectedPetId, 10),
       offeringId: parseInt(serviceId, 10),
     };
 
@@ -33,15 +41,17 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, petId, pets }) =>
         throw new Error('Error creating appointment');
       }
 
+      const formattedDateTime = formatDateTime(dateTime);
+
       Swal.fire({
-        title: 'Appointment created successfully',
+        title: `Your turn for ${serviceName} was correctly booked for ${formattedDateTime}.`,
         icon: 'success'
       });
 
       // Limpiar el formulario
       setDateTime('');
       setDescription('');
-      setSelectedAppointment(appointmentData.dateTime);
+      setSelectedAppointment(dateTime);
     } catch (error) {
       console.error('There was an error!', error);
       Swal.fire({
@@ -55,6 +65,18 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, petId, pets }) =>
 
   return (
     <Box as="form" onSubmit={handleSubmit} p={4} maxWidth="500px" mx="auto" borderWidth="1px" borderRadius="lg" overflow="hidden">
+      <FormControl id="petSelect" mb={4}>
+        <FormLabel>Select Pet</FormLabel>
+        <Select value={selectedPetId} onChange={(e) => {
+          setSelectedPetId(e.target.value);
+          handlePetChange(e.target.value);
+        }} required>
+          <option value="">Select a pet</option>
+          {pets.map(pet => (
+            <option key={pet.id} value={pet.id}>{pet.petName}</option>
+          ))}
+        </Select>
+      </FormControl>
       <FormControl id="dateTime" mb={4}>
         <FormLabel>Date and Time</FormLabel>
         <Input
@@ -73,15 +95,6 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, petId, pets }) =>
           required
         />
       </FormControl>
-      <FormControl id="petSelect" mb={4}>
-        <FormLabel>Select Pet</FormLabel>
-        <Select onChange={(e) => setPetId(e.target.value)} required>
-          <option value="">Select a pet</option>
-          {pets.map(pet => (
-            <option key={pet.id} value={pet.id}>{pet.petName}</option>
-          ))}
-        </Select>
-      </FormControl>
       <Button type="submit" colorScheme="blue" mt={4}>
         Create Appointment
       </Button>
@@ -90,3 +103,4 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, petId, pets }) =>
 };
 
 export default AppointmentTable;
+
