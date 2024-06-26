@@ -6,6 +6,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AddPetModal = ({ addPet }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [image, setImage] = useState("")
+    const [loading , setLoading] = useState(false)
+
+    const upLoadImage = async (event) => {
+        const files = event.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'Veterinary')
+        setLoading(true)
+        const res = await fetch('https://api.cloudinary.com/v1_1/dmioftmku/image/upload', {
+            method: 'POST', 
+            body: data,
+        })
+        const file = await res.json()
+        console.log(res)
+        setImage(file.secure_url)
+        console.log(file.secure_url)
+        setLoading(false)
+    }
+
     const [overlay, setOverlay] = useState(
         <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />
     );
@@ -14,8 +34,10 @@ const AddPetModal = ({ addPet }) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         const petData = Object.fromEntries(formData.entries());
-
+        
+        petData.image = image;
         addPet(petData);
+        console.log(petData);
 
         Swal.fire({
             title: 'Success',
@@ -25,7 +47,7 @@ const AddPetModal = ({ addPet }) => {
         });
 
         onClose();
-    };
+    }
 
     return (
         <>
@@ -83,7 +105,9 @@ const AddPetModal = ({ addPet }) => {
                                     id="exampleFile"
                                     name="file"
                                     type="file"
+                                    onChange={upLoadImage}
                                 />
+                                {loading ? (<h3>Uploadin Image...</h3>) : (<img src={image} style={{width: "300px"}}/>)}
                                 <FormText>
                                     This is some placeholder block-level help text for the above input. It‘s a bit lighter and easily wraps to a new line.
                                 </FormText>

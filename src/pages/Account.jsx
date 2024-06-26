@@ -8,7 +8,7 @@ import AuthLayout from '../layout/AuthLayout';
 import Swal from 'sweetalert2';
 
 import AddPetModal from '../components/AddPetModal';
-=======
+
 import ChatbotAuth from '../ChatBotAuth';
 
 
@@ -77,6 +77,13 @@ const Account = () => {
         return <div>No client data found.</div>;
     }
 
+    const addPet = (newPet) => {
+        setClient((prevClient) => ({
+            ...prevClient,
+            pets: [...prevClient.pets, newPet]
+        }));
+    };
+
     return (
 
         <AuthLayout>
@@ -92,7 +99,7 @@ const Account = () => {
                                 <PetCard key={pet.id} pet={pet} />
                             ))}
                         </div>
-                        <AddPetModal />
+                        <AddPetModal addPet={addPet}  />
                     </div>
 
                     <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Invoices</h1>
@@ -101,6 +108,8 @@ const Account = () => {
                     <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Appointments</h1>
                     <AppointmentClientTable appointments={client.confirmedAppointments} cancelAppointment={cancelAppointment} />
                 </div>
+
+                <ChatbotAuth />
             </div>
         </AuthLayout>
 

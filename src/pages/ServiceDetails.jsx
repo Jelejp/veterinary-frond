@@ -7,7 +7,6 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 
 import { services } from '../utils/serviceList';
-import { useParams } from 'react-router-dom';
 import ChatbotAuth from '../ChatBotAuth.jsx';
 
 
@@ -22,8 +21,9 @@ const ServiceDetails = () => {
 
   useEffect(() => {
     const fetchServiceDetails = async () => {
+      const token = useSelector(store => store.authReducer.token)
       try {
-        const token = localStorage.getItem('token');
+        // const token = localStorage.getItem('token');
         if (!token) {
           throw new Error("No token found in localStorage");
         }
