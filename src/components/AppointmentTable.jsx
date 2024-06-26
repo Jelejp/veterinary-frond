@@ -26,7 +26,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
       offeringId: parseInt(serviceId, 10),
     };
 
-    console.log('Appointment Data:', appointmentData); // Para verificar los datos antes de enviarlos
+    console.log('Appointment Data:', appointmentData);
 
     try {
       const token = localStorage.getItem('token');
@@ -48,7 +48,6 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
         icon: 'success'
       });
 
-      // Limpiar el formulario
       setDateTime('');
       setDescription('');
       setSelectedAppointment(dateTime);
@@ -103,4 +102,3 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 };
 
 export default AppointmentTable;
-
