@@ -9,33 +9,36 @@ const InvoiceTable = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchInvoices = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                if (!token) {
-                    throw new Error("No token found in localStorage");
-                }
 
-                const response = await axios.get('http://localhost:8080/api-veterinary/current', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-
-                const account = response.data.account;
-                if (account && account.chargedInvoices) {
-                    setInvoices(account.chargedInvoices);
-                } else {
-                    setInvoices([]);
-                }
-            } catch (error) {
-                console.error("Error fetching invoices:", error);
-                setError('Failed to fetch invoices');
-            } finally {
-                setLoading(false);
+    const fetchInvoices = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error("No token found in localStorage");
             }
-        };
+
+            const response = await axios.get('http://localhost:8080/api-veterinary/current', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            console.log();
+            const account = response.data.account;
+            if (account && account.chargedInvoices) {
+                setInvoices(account.chargedInvoices);
+            } else {
+                setInvoices([]);
+            }
+        } catch (error) {
+            console.error("Error fetching invoices:", error);
+            setError('Failed to fetch invoices');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {  
 
         fetchInvoices();
     }, []);
@@ -99,8 +102,8 @@ const InvoiceTable = () => {
                                 <p><strong>Date:</strong> {new Date(selectedInvoice.issuedOn).toLocaleString()}</p>
                                 <p><strong>Amount:</strong> ${selectedInvoice.amount.toFixed(2)}</p>
                                 <p><strong>Status:</strong> {selectedInvoice.status === 'CHARGED' ? 'Paid' : 'Unpaid'}</p>
-                                <p><strong>Service:</strong> {selectedInvoice.billedService}</p>
-                                <p><strong>Notes:</strong> {selectedInvoice.notes}</p>
+                                <p><strong>Service:</strong> {selectedInvoice.offering}</p>
+                                <p><strong>Description:</strong> {selectedInvoice.offeringDescription}</p>
                             </div>
                         )}
                     </ModalBody>
