@@ -5,7 +5,10 @@ import axios from 'axios';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { Button } from 'reactstrap';
+
 const CardService = () => {
+    const token = useSelector(store => store.authReducer.token)
     const [services, setServices] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
@@ -27,7 +30,8 @@ const CardService = () => {
     useEffect(() => {
         const getServices = async () => {
             const token = localStorage.getItem('token');
-            console.log("Token retrieved from localStorage:", token); // Debugging line
+            console.log("Token retrieved from localStorage:", token);
+
             if (!token) {
                 console.error("No token found in localStorage");
                 mensajeError();
@@ -83,10 +87,9 @@ const CardService = () => {
                             <p className="text-gray-600 mb-4">{service.description}</p>
                             <div className='flex justify-center w-full'>
                                 <Link to={`/auth/service/${service.id}`} >
-                                    <button className="relative  px-6 py-3 text-lg font-semibold text-gray-400 bg-transparent border-none rounded-full cursor-pointer transition-all duration-600 ease-in-out shadow-[0_0_0_2px_rgba(255,255,255,0.12)] hover:shadow-[0_0_0_5px_rgba(33,150,243,0.38)] hover:text-white active:scale-95 overflow-hidden hover:bg-[#8BA8C4]">
-                                        <span className="relative z-10">View Details</span>
-                                        <span className="absolute bg-[#8BA8C4] rounded-full transition-all duration-800 ease-in-out transform -translate-x-1/2 -translate-y-1/2 hover:w-full hover:h-full hover:opacity-100 "></span>
-                                    </button>
+                                <button className="bg-[#80b3e2] hover:bg-[#6ca8e0] text-white font-bold py-2 px-4 rounded">
+                                    View Details
+                                </button>
                                 </Link>
                             </div>
                         </div>

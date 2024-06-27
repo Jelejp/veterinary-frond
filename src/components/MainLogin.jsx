@@ -51,11 +51,9 @@ const MainLogin = () => {
 
             const response = await axios.post('http://localhost:8080/api-veterinary/login', user);
             let token = response.data
+            console.log(response.data);
+            // localStorage.setItem('token', token);
 
-            // Guardar el token en localStorage
-            localStorage.setItem('token', token);
-
-            // Obtener información adicional del cliente
             const responseCurrentClient = await axios.get("http://localhost:8080/api-veterinary/current", {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -63,10 +61,26 @@ const MainLogin = () => {
             })
 
             let client = responseCurrentClient.data;
+            
             client.token = token
 
             console.log(client);
+            // Check roles in client data
+        //     const isAdmin = client.roles && client.roles.includes('ADMIN');
+        //     if (!client.roles) {
+        //     console.error('Roles are missing in the client data');
+        // } else {
+        //     console.log('Roles:', isAdmin);
+        // }
+
             dispatch(login(client))
+        // dispatch(login({
+        //     firstName: client.firstName,
+        //     lastName: client.lastName,
+        //     email: client.email,
+        //     token: token,
+        //     admin: isAdmin // Asigna isAdmin aquí
+        // }))
 
             navigate("/auth/account")
 

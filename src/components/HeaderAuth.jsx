@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LinksAuth from './LinksAuth';
+import { Link } from 'react-router-dom';
 
 const HeaderAuth = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -10,12 +11,14 @@ const HeaderAuth = () => {
 
     return (
         <>
-            <header className='bg-[#8BA8C4] gap-8 py-1 flex justify-between md:flex md:justify-between items-center px-4 md:px-10 lg:px-20 h-[15vh]'>
+            <header className='bg-[#8BA8C4] gap-8 flex justify-between  items-center px-4 h-[15vh]'>
                 <div className='flex items-center'>
-                    <picture className='flex gap-2 lg:gap-3 items-center'>
+                    <Link to={'/auth/account'}>
+                    <picture className='flex gap-2 lg:gap-3 items-center cursor-pointer'>
                         <img className='w-8 md:w-20' src="/assets/icono-VetNova.png" alt="logo" />
                         <h1 className='text-white font-bold text-1xl md:text-4xl lg:text-5x1'>VetNova</h1>
                     </picture>
+                    </Link>
                 </div>
                 <div className='md:hidden'>
                     <button onClick={toggleMenu} className='text-white focus:outline-none'>
@@ -26,7 +29,7 @@ const HeaderAuth = () => {
                         />
                     </button>
                 </div>
-                <nav className='hidden md:flex md:items-center'>
+                <nav className='hidden md:flex md:items-center mt-[30px]'>
                     <LinksAuth />
                 </nav>
             </header>
