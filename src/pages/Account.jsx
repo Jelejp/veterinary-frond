@@ -15,6 +15,7 @@ import ChatbotAuth from '../ChatBotAuth';
 const Account = () => {
     const [client, setClient] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
         const fetchClientData = async () => {
@@ -25,8 +26,10 @@ const Account = () => {
                         Authorization: `Bearer ${token}`
                     }
                 });
+                console.log(response.data);
 
                 setClient(response.data);
+                setAppointments(response.data.confirmedAppointments);
             } catch (error) {
                 console.error("Error fetching client data:", error);
                 Swal.fire({
