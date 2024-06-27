@@ -86,7 +86,7 @@ const MainRegister = () => {
                     transition: Bounce
                 })
                 setTimeout(() => {
-                    navigate('/auth/account');
+                    navigate('/login');
                 }, 2000)
             } else {
                 toast.error('An account with this email address already exists.', {

@@ -4,9 +4,11 @@ import InputSearch from './InputSearch';
 import axios from 'axios';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import { Button } from 'reactstrap';
 
 const CardService = () => {
+    const token = useSelector(store => store.authReducer.token)
     const [services, setServices] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
@@ -29,6 +31,7 @@ const CardService = () => {
         const getServices = async () => {
             const token = localStorage.getItem('token');
             console.log("Token retrieved from localStorage:", token);
+
             if (!token) {
                 console.error("No token found in localStorage");
                 mensajeError();

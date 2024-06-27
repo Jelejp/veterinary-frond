@@ -20,18 +20,14 @@ const LinksAuth = () => {
     return (
         <div className='flex flex-col md:flex-row justify-center items-center w-full h-full  '>
             {links.map((anchor, id) => (
-                <Link
-                    key={id}
-                    href={anchor.to}
-                    className={`w-full md:w-auto text-center px-4  md:py-0 ${anchor.class}`}
-                >
-                    <LinkTo
+                <div key={id} className={`w-full md:w-auto text-center px-4  md:py-0 ${anchor.class}`}>
+                    <LinkTo                        
                         text={anchor.text}
                         to={anchor.to}
                         img={anchor.img}
                         activeIcon={anchor.activeIcon}
                     />
-                </Link>
+                </div>
             ))}
             {/* <a href="/" className="w-full md:w-auto text-red-500 font-bold hover:text-red-700 text-center md:pl-3 md:py-0">
                 Logout

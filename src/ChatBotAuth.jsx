@@ -70,7 +70,7 @@ const ChatbotAuth = () => {
 
     const toggleChatbot = () => {
         setIsOpen(!isOpen)
-    };
+    }
 
     return (
         <div className="fixed-chatbot">
@@ -83,7 +83,7 @@ const ChatbotAuth = () => {
                 </ThemeProvider>
             )}
         </div>
-    );
+    )
 }
 
 export default ChatbotAuth
