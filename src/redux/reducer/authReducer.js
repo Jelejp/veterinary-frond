@@ -5,9 +5,10 @@ const intialState = {
     loggedIn: false,
     token: '',
     expiresIn: '',
+    isAdmin: false,
     user: {
         name: '',
-        email: ''
+        email: '',
     }
 }
 
@@ -17,11 +18,12 @@ const authReducer = createReducer(intialState, (builder) => {
             ...state,
             user: {
                 name: action.payload.name,
-                email: action.payload.email
+                email: action.payload.email,
             },
             token: action.payload.token,
             loggedIn: action.payload.loggedIn,
-            expiresIn: action.payload.expiresIn
+            expiresIn: action.payload.expiresIn,
+            isAdmin: action.payload.isAdmin
         }
     })
     .addCase(logout, (state, action)=>{

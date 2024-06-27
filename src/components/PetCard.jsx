@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-const PetCard = ({ pet }) => (
-    <div className="bg-[#FAE7D5] rounded-lg shadow-md p-4 mb-4">
-        <img src={pet.image} alt={`${pet.petName}`} style={{ width: '100%', maxHeight: '450px' }} className="mb-4" />
-        <h2 className="text-xl font-bold mb-2">{pet.petName}</h2>
-        <p><strong>Species:</strong> {pet.species}</p>
-        <p><strong>Breed:</strong> {pet.breed}</p>
-        <p><strong>Age:</strong> {pet.petAge}</p>
-        <p><strong>Size:</strong> {pet.petSize}</p>
-        <p><strong>Special Treatment:</strong> {pet.specialTreatment}</p>
+const PetCard = ({image, petName, species, breed, petAge, petSize, specialTreatment }) => (
+<div className='w-100% bg-[#FAE7D5]  rounded-lg shadow-md '>
+        <img src={image} /* alt={`${petName}`} */ style={{ width: '100%', maxHeight: '200px', objectFit: 'cover' }} className="mb-4 rounded-tl-lg rounded-tr-lg" />
+    <div className="  p-4 ">
+        <h2 className="text-xl font-bold mb-2">{petName}</h2>
+        <p><strong>Species:</strong> {species}</p>
+        <p><strong>Breed:</strong> {breed}</p>
+        <p><strong>Age:</strong> {petAge}</p>
+        <p><strong>Size:</strong> {petSize}</p>
+        <p><strong>Special Treatment:</strong> {specialTreatment}</p>
+    </div>
     </div>
 );
 
