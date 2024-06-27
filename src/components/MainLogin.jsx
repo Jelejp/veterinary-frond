@@ -56,8 +56,6 @@ const MainLogin = () => {
             localStorage.setItem('token', token);
 
             // Obtener información adicional del cliente
-
-
             const responseCurrentClient = await axios.get("http://localhost:8080/api-veterinary/current", {
                 headers: {
                     Authorization: `Bearer ${token}`
