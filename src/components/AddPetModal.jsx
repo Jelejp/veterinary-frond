@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, Select, Textarea, useDisclosure } from '@chakra-ui/react';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 import { FormGroup, FormText, Label } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -30,23 +31,43 @@ const AddPetModal = ({ addPet }) => {
         <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />
     );
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        const petData = Object.fromEntries(formData.entries());
-        
-        petData.image = image;
-        addPet(petData);
-        console.log(petData);
-
-        Swal.fire({
-            title: 'Success',
-            text: 'Pet added successfully!',
-            icon: 'success',
-            confirmButtonText: 'Ok',
-        });
-
-        onClose();
+        const petData = {
+            name: formData.get('petName'),
+            age: formData.get('petAge'),
+            specie: formData.get('species'),
+            breed: formData.get('breed'),
+            animalSize: formData.get('petSize').toUpperCase(),
+            specialTreatment: formData.get('specialTreatment'),
+            imageUrl: image
+        }
+        console.log(petData)
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.post('http://localhost:8080/api-veterinary/pets/new', petData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            addPet(response.data);
+            Swal.fire({
+                title: 'Success',
+                text: 'Pet added successfully!',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+            });
+            onClose();
+        } catch (error) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Failed to add pet',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+            });
+            console.error("Error adding pet:", error);
+        }
     }
 
     return (

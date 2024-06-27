@@ -30,6 +30,7 @@ const Account = () => {
 
                 setClient(response.data);
                 setAppointments(response.data.confirmedAppointments);
+
             } catch (error) {
                 console.error("Error fetching client data:", error);
                 Swal.fire({
@@ -86,7 +87,7 @@ const Account = () => {
             pets: [...prevClient.pets, newPet]
         }));
     };
-
+    
     return (
 
         <AuthLayout>
@@ -99,10 +100,10 @@ const Account = () => {
                         <h2 className="text-xl font-bold mb-2">Pets:</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {client.pets.map(pet => (
-                                <PetCard key={pet.id} pet={pet} />
+                                <PetCard image={pet.imageUrl} key={pet.id} pet={pet} />
                             ))}
                         </div>
-                        <AddPetModal addPet={addPet}  />
+                        <AddPetModal addPet={addPet}/>
                     </div>
 
                     <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Invoices</h1>
