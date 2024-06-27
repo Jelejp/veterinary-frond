@@ -16,6 +16,7 @@ const Account = () => {
     const token = useSelector(store => store.authReducer.token);
     const [client, setClient] = useState(null);
     const [loading, setLoading] = useState(true);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const fetchClientData = async () => {
@@ -60,6 +61,26 @@ const Account = () => {
                         appointment.id === id ? { ...appointment, appointmentStatus: 'Cancelled' } : appointment
                     ),
                 }));
+
+    const [appointments, setAppointments] = useState([]);
+
+    useEffect(() => {
+        const fetchClientData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get('http://localhost:8080/api-veterinary/current', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log(response.data);
+
+                setClient(response.data);
+                setAppointments(response.data.confirmedAppointments);
+
+            } catch (error) {
+                console.error("Error fetching client data:", error);
+
                 Swal.fire({
                     title: 'Cancelled!',
                     text: 'Your appointment has been cancelled.',

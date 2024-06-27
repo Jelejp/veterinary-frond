@@ -1,6 +1,7 @@
 import React from 'react';
 
 const AppointmentClientTable = ({ appointments, cancelAppointment }) => {
+    console.log(appointments);
     const getStatusColor = (status) => {
         switch (status.toLowerCase()) {
             case 'cancelled':
@@ -13,6 +14,7 @@ const AppointmentClientTable = ({ appointments, cancelAppointment }) => {
                 return 'text-gray-500';
         }
     };
+
 
     return (
         <div className="mb-6">
