@@ -12,6 +12,7 @@ const ServiceDetails = () => {
   const [selectedPet, setSelectedPet] = useState(null);
   const [calculatedPrice, setCalculatedPrice] = useState(null);
   const [additionalChargeMessage, setAdditionalChargeMessage] = useState('');
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   useEffect(() => {
     const fetchServiceDetails = async () => {
@@ -115,7 +116,7 @@ const ServiceDetails = () => {
 
           <h2 className="text-xl font-bold text-[#5aa6ec] mt-3">Book your appointment:</h2>
           <AppointmentTable
-            setSelectedAppointment={(dateTime) => setSelectedAppointment(dateTime)}
+            setSelectedAppointment={setSelectedAppointment}
             serviceId={service.id}
             serviceName={service.name}
             pets={pets}
