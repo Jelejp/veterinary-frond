@@ -60,7 +60,26 @@ const routesAdmin = [
     element: <AdminPanel />,
     key: 'adminPanel',
   },
-
+  {
+    path: '/admin/services',
+    element: <Services />,
+    key: 'services',
+  },
+  {
+    path: '/admin/service/:id',
+    element: <ServiceDetails />,
+    key: 'servicedetails',
+  },
+  {
+    path: '/admin/Veterinary',
+    element: <Veterinary />,
+    key: 'veterinary',
+  },
+  {
+    path: '/admin/account',
+    element: <Account />,
+    key: 'accounts',
+  },
 ];
 
 function App() {

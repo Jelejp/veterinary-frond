@@ -4,6 +4,7 @@ import AuthLayout from '../layout/AuthLayout';
 import NewServiceForm from '../components/NewServiceForm';
 import EditServicePrice from '../components/EditServicePrice';
 import NewVeterinarian from '../components/NewVeterinarian';
+import DeleteVeterinarian from '../components/DeleteVaterinarian';
 
 
 const AdminPanel = () => {
@@ -28,6 +29,10 @@ const AdminPanel = () => {
           <div className='w-11/12 lg:w-8/12 xl:w-4/12 2xl:2/12 flex flex-col justify-center items-center'>
             <h3 className='text-3xl text-white font-bold w-11/12 text-center bg-[#8BA8C4] py-1 rounded mt-14 mb-4' >Add New Veterinarian</h3>
             <NewVeterinarian />
+          </div>
+          <div className='w-11/12 lg:w-8/12 xl:w-4/12 2xl:2/12 flex flex-col justify-center items-center'>
+            <h3 className='text-3xl text-white font-bold w-11/12 text-center bg-[#8BA8C4] py-1 rounded mt-14 mb-4' >Delete a Veterinarian</h3>
+            <DeleteVeterinarian />
           </div>
         </main>
       </AuthLayout>
