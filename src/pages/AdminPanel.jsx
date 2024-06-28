@@ -6,13 +6,10 @@ import EditServicePrice from '../components/EditServicePrice';
 import NewVeterinarian from '../components/NewVeterinarian';
 import DeleteVeterinarian from '../components/DeleteVaterinarian';
 
-
-
 const AdminPanel = () => {
 
   const token = useSelector(store => store.authReducer.token);
   
-
   return (
     <>
       <AuthLayout>
