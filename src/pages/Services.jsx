@@ -7,7 +7,7 @@ const Services = () => {
   return (
     <>
       <AuthLayout>
-        <section className=' min-h-screen'>
+        <section className='min-h-screen'>
           <h1 className="text-3xl text-center font-bold mb-6 pt-7">Our services</h1>
           <CardService />
           <ChatbotAuth />

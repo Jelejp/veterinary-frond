@@ -10,8 +10,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
   const [selectedPetId, setSelectedPetId] = useState('');
   const [availableSlots, setAvailableSlots] = useState([]);
   const [selectedSlotId, setSelectedSlotId] = useState('');
-  const token = useSelector(store => store.authReducer.token);
-
+  const token = useSelector((state) => state.authReducer.token);
 
   useEffect(() => {
     handleFetchAvailableSlots(serviceId);
@@ -25,7 +24,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
   };
 
   const handleFetchAvailableSlots = async (serviceId) => {
-    try {      
+    try {
       const response = await axios.get(`http://localhost:8080/api-veterinary/offerings/${serviceId}`, {
         headers: {
           Authorization: `Bearer ${token}`

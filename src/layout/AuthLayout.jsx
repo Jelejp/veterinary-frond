@@ -7,19 +7,19 @@ import { Outlet } from 'react-router-dom';
 
 const AuthLayout = (props) => {
 
-    const location = useLocation()
-    const landingViews = location.pathname === '/' || location.pathname === '/Register' || location.pathname === '/Login';
+	const location = useLocation()
+	const landingViews = location.pathname === '/' || location.pathname === '/Register' || location.pathname === '/Login';
 
-    return (
-        <>
-            <HeaderAuth/>
-            <main className=' flex min-h-[90vh] w-full flex-col'>
-                {props.children}
-            </main>
+	return (
+		<>
+			<HeaderAuth />
+			<main className=' flex min-h-[90vh] w-full flex-col'>
+				{props.children}
+			</main>
 
-            <FooterAuth />
-        </>
-    );
+			<FooterAuth />
+		</>
+	);
 };
 
 export default AuthLayout;
