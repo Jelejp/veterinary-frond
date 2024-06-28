@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 const NewServiceForm = () => {
 
@@ -9,6 +10,7 @@ const NewServiceForm = () => {
 	const [price, setPrice] = useState(0); // Aquí también corregido
 	const [name, setName] = useState(''); // Aquí también corregido
 	const [description, setDescription] = useState(''); // Aquí también corregido
+	const token = useSelector(store => store.authReducer.token);
 
 	// Estados para manejar los valores del formulario
 	const formData = {
@@ -16,6 +18,11 @@ const NewServiceForm = () => {
 		description,
 		price
 	};
+
+	const handlePriceChange = (e) =>{
+		e.preventDefault();
+		setPrice(parseFloat(e.target.value));
+	}
 
 	// Manejar envío del formulario
 	const handleSubmit = async (e) => {
@@ -81,7 +88,7 @@ const NewServiceForm = () => {
 					id="price"
 					name="price"
 					value={formData.price}
-					onChange={e => setPrice(e.target.value).parseFloat()}
+					onChange={handlePriceChange}
 					placeholder="Enter service price"
 					className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					required

@@ -6,9 +6,9 @@ const activePage = {
 };
 
 export const linksUser = [
-    { text: "Services", to: "/auth/services", img: "/assets/services.png", activeIcon: activePage.Services },
-    { text: "Veterinary", to: "/auth/veterinary", img: "/assets/veterinary.png", activeIcon: activePage.Veterinary },
     { text: "Account", to: "/auth/account", img: "/assets/user.png", activeIcon: activePage.Account },
+    { text: "Services", to: "/auth/services", img: "/assets/services.png", activeIcon: activePage.Services },
+    { text: "Vets", to: "/auth/veterinary", img: "/assets/veterinary.png", activeIcon: activePage.Veterinary },
     { text: "Logout", to: "/", img: "/assets/logout.png", activeIcon: activePage.Logout },
 ];
 
