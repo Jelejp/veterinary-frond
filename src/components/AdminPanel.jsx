@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 const AdminPanel = () => {
+    
     const isAdmin = useSelector(store => store.authReducer.user.isAdmin);
-
 
     return (
         <div>

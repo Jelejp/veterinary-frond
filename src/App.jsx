@@ -66,7 +66,7 @@ const routesAdmin = [
 function App() {
   return (
     <BrowserRouter>
-      <Routes>       
+      <Routes path='/' >       
           {
             routesAdmin.map(RoutesAuthAdmin)
           }

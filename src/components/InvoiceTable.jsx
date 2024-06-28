@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button } from '@chakra-ui/react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const InvoiceTable = () => {
     const [selectedInvoice, setSelectedInvoice] = useState(null);
@@ -8,15 +9,11 @@ const InvoiceTable = () => {
     const [invoices, setInvoices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const token = useSelector(store => store.authReducer.token);
 
 
     const fetchInvoices = async () => {
         try {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                throw new Error("No token found in localStorage");
-            }
-
             const response = await axios.get('http://localhost:8080/api-veterinary/current', {
                 headers: {
                     Authorization: `Bearer ${token}`

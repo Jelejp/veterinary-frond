@@ -4,7 +4,7 @@ import InputSearch from './InputSearch';
 import axios from 'axios';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useSelector } from 'react-redux';
 import { Button } from 'reactstrap';
 
 const CardService = () => {
@@ -12,6 +12,7 @@ const CardService = () => {
     const [services, setServices] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
+
 
     const mensajeError = () => {
         toast.error('Error fetching services', {
@@ -29,16 +30,6 @@ const CardService = () => {
 
     useEffect(() => {
         const getServices = async () => {
-            const token = localStorage.getItem('token');
-            console.log("Token retrieved from localStorage:", token);
-
-            if (!token) {
-                console.error("No token found in localStorage");
-                mensajeError();
-                setLoading(false);
-                return;
-            }
-
             try {
                 const response = await axios.get("http://localhost:8080/api-veterinary/offerings/", {
                     headers: {
