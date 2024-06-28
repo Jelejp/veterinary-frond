@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import LinksAuth from './LinksAuth';
 import { Link } from 'react-router-dom';
+import LinksAuth from './LinksAuth';
 
 
 const HeaderAuth = () => {

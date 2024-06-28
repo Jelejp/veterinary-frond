@@ -14,8 +14,8 @@ export const linksUser = [
 
 export const linksAdmin = [
     { text: "Admin Panel", to: "/auth/admin", img: "/assets/admin.png", activeIcon: activePage.Admin },
+    { text: "Account", to: "/admin/account", img: "/assets/user.png", activeIcon: activePage.Account },
     { text: "Services", to: "/admin/services", img: "/assets/services.png", activeIcon: activePage.Services },
     { text: "Veterinary", to: "/admin/veterinary", img: "/assets/veterinary.png", activeIcon: activePage.Veterinary },
-    { text: "Account", to: "/admin/account", img: "/assets/user.png", activeIcon: activePage.Account },
     { text: "Logout", to: "/", img: "/assets/logout.png", activeIcon: activePage.Logout },
 ];

@@ -14,6 +14,7 @@ const MainLogin = () => {
   const [loading, setLoading] = useState(false)
 
   const mensajeError = () => {
+    
     toast.error('Email or Password incorrect', {
       position: "top-center",
       autoClose: 2000,
@@ -95,6 +96,7 @@ const MainLogin = () => {
     setPassword(event.target.value)
   }
 
+<<<<<<< HEAD
   return ( // border border-gray-300 
     <div className='flex flex-col md:flex-row md:items-center min-h-full overflow-y-auto border border-black '>
       <article className='text-center md:w-1/2 h-full flex flex-col items-center'>
@@ -105,6 +107,18 @@ const MainLogin = () => {
           </label>
           <div className='flex w-8/12 items-center gap-2 relative  border border-black'>
             <input onChange={handlePasswordChange} type="password" name='password' required placeholder='PASSWORD' className='shadow mx-2 p-4 border rounded-md w-full id_password' />
+=======
+  return (
+    <div className='flex flex-col md:flex-row h-[100vh] lg:h-[100vh] md:h-[100vh] overflow-y-auto '>
+      <article className='text-center md:w-1/2 h-full flex flex-col justify-center'>
+        <h2 className='font-bold text-3xl mb-4'>Login to your account</h2>
+        <form className='flex flex-col gap-8'>
+          <label className='flex'>
+            <input onChange={handleUsernameChange} type="email" name='user' required placeholder='EMAIL' className='shadow mx-2 p-4 rounded-md w-full' />
+          </label>
+          <div className='flex items-center gap-2 relative'>
+            <input onChange={handlePasswordChange} type="password" name='password' required placeholder='PASSWORD' className='shadow mx-2 p-4 rounded-md w-full id_password' />
+>>>>>>> newdev
           </div>
           <div className='flex justify-around items-center gap-2 flex-wrap-reverse  border border-black'>
             <button className='flex justify-center items-center'>
