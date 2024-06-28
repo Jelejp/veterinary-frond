@@ -5,9 +5,6 @@ import { Navigate } from 'react-router-dom';
 const AdminPanel = () => {
     const isAdmin = useSelector(store => store.authReducer.user.isAdmin);
 
-    if (!user || !user.isAdmin) {
-        return <Navigate to="/auth/account" />;
-    }
 
     return (
         <div>

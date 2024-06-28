@@ -12,8 +12,7 @@ import { useSelector } from 'react-redux';
 import AddPetModal from '../components/AddPetModal';
 import ChatbotAuth from '../ChatBotAuth';
 
-const Account = () => { 
-
+const Account = () => {
     const token = useSelector(store => store.authReducer.token);
     const [client, setClient] = useState(null);
     const [loading, setLoading] = useState(true);

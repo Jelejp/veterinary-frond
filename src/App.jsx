@@ -1,4 +1,3 @@
-
 import './App.css'
 import Home from './pages/Home'
 import { BrowserRouter } from 'react-router-dom'
@@ -14,50 +13,45 @@ import RoutesNoAuth from './HOCs/RoutesNoAuth'
 import AdminPanel from './components/AdminPanel'
 import RoutesAuthAdmin from './HOCs/RoutesAuthAdmin'
 
-const routesAuth = [{
-  path: '/auth/account',
-  element: <Account />,
-  key: 'accounts',
-},
-{
-  path: '/auth/services',
-  element: <Services />,
-  key: 'services',
-},
-{
-  path: '/auth/service/:id',
-  element: <ServiceDetails />,
-  key: 'servicedetails',
-},
-{
-  path: '/auth/Veterinary',
-  element: <Veterinary />,
-  key: 'veterinary',
-},
-{
-  path: '/auth/admin',
-  element: <AdminPanel />,
-  key: 'adminPanel',
-}
+const routesAuth = [
+  {
+    path: '/auth/account',
+    element: <Account />,
+    key: 'accounts',
+  },
+  {
+    path: '/auth/services',
+    element: <Services />,
+    key: 'services',
+  },
+  {
+    path: '/auth/service/:id',
+    element: <ServiceDetails />,
+    key: 'servicedetails',
+  },
+  {
+    path: '/auth/Veterinary',
+    element: <Veterinary />,
+    key: 'veterinary',
+  },
 ]
-const routesNoAuth = [{
-  path: '/Login',
-  element: <Login />,
-  key: 'login',
-},
-{
-  path: '/Register',
-  element: <Register />,
-  key: 'register',
 
-},
-
-{
-  path: '/',
-  element: <Home />,
-  key: 'home',
-
-}
+const routesNoAuth = [
+  {
+    path: '/Login',
+    element: <Login />,
+    key: 'login',
+  },
+  {
+    path: '/Register',
+    element: <Register />,
+    key: 'register',
+  },
+  {
+    path: '/',
+    element: <Home />,
+    key: 'home',
+  }
 ]
 
 const routesAdmin = [
@@ -66,23 +60,22 @@ const routesAdmin = [
     element: <AdminPanel />,
     key: 'adminPanel',
   },
-];
-function App() {
 
+];
+
+function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {
-          routesAdmin.map(RoutesAuthAdmin)
-        }
-        <Route>
+      <Routes>       
+          {
+            routesAdmin.map(RoutesAuthAdmin)
+          }
           {
             routesAuth.map(RoutesAuth)
           }
-        </Route>
-        {
-          routesNoAuth.map(RoutesNoAuth)
-        }
+          {
+            routesNoAuth.map(RoutesNoAuth)
+          }        
       </Routes>
     </BrowserRouter>
   )
