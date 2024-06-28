@@ -56,18 +56,19 @@ const ServiceDetails = () => {
 
     switch (petSize) {
       case 'SMALL':
-        additionalCharge = 0;
+        additionalCharge = basePrice;
         break;
       case 'MEDIUM':
-        additionalCharge = 10;
+        additionalCharge = basePrice * 1.25;
         break;
       case 'LARGE':
-        additionalCharge = 20;
+        additionalCharge = basePrice * 1.5;
         break;
       case 'BIGGER':
-        additionalCharge = 30;
+        additionalCharge = basePrice * 1.75;
         break;
       default:
+        additionalCharge = 0;
         break;
     }
 
@@ -105,15 +106,13 @@ const ServiceDetails = () => {
             />
             <h1 className="text-3xl font-bold text-[#5aa6ec] mb-4">{service.name}</h1>
             <p className="text-lg text-gray-700 mb-4">{service.description}</p>
-            <p className="text-lg text-gray-700 mb-4 mt-3">Requirements: {service.requirements}</p>
-            <h3 className="text-xl font-bold text-[#5aa6ec] mb-2">Attended by: {service.attendedBy}</h3>
-            <h2 className="text-2xl font-bold text-[#5aa6ec] mb-2">Price: ${calculatedPrice ? calculatedPrice.toLocaleString() : service.price.toLocaleString()}</h2>
+            <h2 className="text-3xl font-bold text-red-500  mb-2">Price: ${calculatedPrice ? calculatedPrice.toLocaleString() : service.price.toLocaleString()}</h2>
 
             {additionalChargeMessage && (
               <p className="text-red-500 mb-4">{additionalChargeMessage}</p>
             )}
 
-            <h2 className="text-xl font-bold text-[#5aa6ec] mt-3">Book your appointment:</h2>
+            <h2 className="text-xl font-bold text-[#5aa6ec] my-4">Book your appointment:</h2>
             <AppointmentTable
               setSelectedAppointment={setSelectedAppointment}
               serviceId={service.id}

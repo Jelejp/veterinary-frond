@@ -102,7 +102,7 @@ const Account = () => {
               <AddPetModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
             </div>
 
-            <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Invoices</h1>
+            <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>My services</h1>
             <InvoiceTable invoices={client.chargedInvoices || []} />
 
             <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Appointments</h1>

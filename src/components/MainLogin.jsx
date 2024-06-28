@@ -14,6 +14,7 @@ const MainLogin = () => {
   const [loading, setLoading] = useState(false)
 
   const mensajeError = () => {
+    
     toast.error('Email or Password incorrect', {
       position: "top-center",
       autoClose: 2000,
@@ -101,10 +102,10 @@ const MainLogin = () => {
         <h2 className='font-bold text-3xl mb-4'>Login to your account</h2>
         <form className='flex flex-col gap-8'>
           <label className='flex'>
-            <input onChange={handleUsernameChange} type="email" name='user' required placeholder='EMAIL' className='shadow mx-2 p-4 border rounded-md w-full' />
+            <input onChange={handleUsernameChange} type="email" name='user' required placeholder='EMAIL' className='shadow mx-2 p-4 rounded-md w-full' />
           </label>
           <div className='flex items-center gap-2 relative'>
-            <input onChange={handlePasswordChange} type="password" name='password' required placeholder='PASSWORD' className='shadow mx-2 p-4 border rounded-md w-full id_password' />
+            <input onChange={handlePasswordChange} type="password" name='password' required placeholder='PASSWORD' className='shadow mx-2 p-4 rounded-md w-full id_password' />
           </div>
           <div className='flex justify-around items-center gap-2 flex-wrap-reverse'>
             <button className='flex justify-center items-center'>

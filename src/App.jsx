@@ -10,7 +10,7 @@ import ServiceDetails from './pages/ServiceDetails'
 import Veterinary from './pages/Veterinary'
 import RoutesAuth from './HOCs/RoutesAuth'
 import RoutesNoAuth from './HOCs/RoutesNoAuth'
-import AdminPanel from './components/AdminPanel'
+import AdminPanel from './pages/AdminPanel'
 import RoutesAuthAdmin from './HOCs/RoutesAuthAdmin'
 
 const routesAuth = [
