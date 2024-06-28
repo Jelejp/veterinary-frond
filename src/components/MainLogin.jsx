@@ -65,22 +65,10 @@ const MainLogin = () => {
             client.token = token
 
             console.log(client);
-            // Check roles in client data
-        //     const isAdmin = client.roles && client.roles.includes('ADMIN');
-        //     if (!client.roles) {
-        //     console.error('Roles are missing in the client data');
-        // } else {
-        //     console.log('Roles:', isAdmin);
-        // }
+
 
             dispatch(login(client))
-        // dispatch(login({
-        //     firstName: client.firstName,
-        //     lastName: client.lastName,
-        //     email: client.email,
-        //     token: token,
-        //     admin: isAdmin // Asigna isAdmin aquí
-        // }))
+
 
             navigate("/auth/account")
 
