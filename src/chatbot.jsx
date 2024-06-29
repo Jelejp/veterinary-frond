@@ -1,8 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
-// Definir los pasos del chatbot
+
 const steps = [
     {
         id: '1',
@@ -19,17 +18,17 @@ const steps = [
     },
     {
         id: 'pedir_turno',
-        message: 'Para pedir un turno, puedes visitar nuestra página de servicios y seleccionando el que gustes o llamarnos al 350-890-4597.',
+        message: 'Para pedir un turno, puedes visitar nuestra página de servicios y seleccionar el que prefieras o llamarnos al 350-890-4597.',
         trigger: 'final',
     },
     {
         id: 'ver_cuenta',
-        message: 'Para ver tus cuenta, inicia sesión en nuestra página y ve a la sección de cuenta.',
+        message: 'Para ver tu cuenta, inicia sesión en nuestra página y ve a la sección de cuenta.',
         trigger: 'final',
     },
     {
         id: 'info_clinica',
-        message: 'Estamos ubicados en la calle Paraguay 1919, Recoleta y nuestro horario es de 9 am a 6 pm de lunes a sábados.',
+        message: 'Estamos ubicados en la calle Paraguay 1919, Recoleta. Nuestro horario es de 9 am a 6 pm de lunes a sábado.',
         trigger: 'final',
     },
     {
@@ -37,7 +36,7 @@ const steps = [
         message: '¿Necesitas algo más?',
         trigger: 'options',
     },
-]
+];
 
 const theme = {
     background: '#f5f8fb',
@@ -49,15 +48,21 @@ const theme = {
     botFontColor: '#fff',
     userBubbleColor: '#fff',
     userFontColor: '#4a4a4a',
-}
-
-
+    bubbleStyle: {
+        padding: '10px 15px',
+        maxWidth: '70%',
+    },
+};
 
 const Chatbot = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true); // Iniciar abierto por defecto
 
     const toggleChatbot = () => {
-        setIsOpen(!isOpen)
+        setIsOpen(!isOpen);
+    };
+
+    const closeChatbot = () => {
+        setIsOpen(false);
     };
 
     return (
@@ -66,12 +71,17 @@ const Chatbot = () => {
                 {isOpen ? 'Close' : 'ChatBot'}
             </button>
             {isOpen && (
-                <ThemeProvider theme={theme}>
-                    <ChatBot steps={steps} />
-                </ThemeProvider>
+                <div className="chatbot-container">
+                    <ThemeProvider theme={theme}>
+                        <ChatBot steps={steps} />
+                    </ThemeProvider>
+                    <button className="close-button" onClick={closeChatbot}>
+                        X
+                    </button>
+                </div>
             )}
         </div>
     );
-}
+};
 
-export default Chatbot
+export default Chatbot;
