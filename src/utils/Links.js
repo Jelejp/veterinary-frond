@@ -2,7 +2,8 @@ const activePage = {
     Services: "/assets/services-active.png",
     Veterinary: "/assets/veterinary-active.png",
     Account: "/assets/user-active.png",
-    Logout: "/assets/logout-active.png"
+    Logout: "/assets/logout-active.png",
+    admin: "/assets/settings-active.png"
 };
 
 export const linksUser = [
@@ -13,7 +14,7 @@ export const linksUser = [
 ];
 
 export const linksAdmin = [
-    { text: "Admin Panel", to: "/auth/admin", img: "/assets/admin.png", activeIcon: activePage.Admin },
+    { text: "Admin Panel", to: "/auth/admin", img: "/assets/settings-inactive.png", activeIcon: activePage.admin },
     { text: "Account", to: "/admin/account", img: "/assets/user.png", activeIcon: activePage.Account },
     { text: "Services", to: "/admin/services", img: "/assets/services.png", activeIcon: activePage.Services },
     { text: "Veterinary", to: "/admin/veterinary", img: "/assets/veterinary.png", activeIcon: activePage.Veterinary },
