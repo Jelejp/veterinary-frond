@@ -17,10 +17,12 @@ const AddPetModal = ({ isModalOpen, setIsModalOpen }) => {
             onClose();
         }
     });
+
     const [image, setImage] = useState("");
     const [loading, setLoading] = useState(false);
 
     const upLoadImage = async (event) => {
+
         const files = event.target.files;
         const data = new FormData();
         data.append('file', files[0]);
@@ -33,6 +35,7 @@ const AddPetModal = ({ isModalOpen, setIsModalOpen }) => {
         const file = await res.json();
         setImage(file.secure_url);
         setLoading(false);
+        
     };
 
     const [overlay, setOverlay] = useState(

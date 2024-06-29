@@ -81,14 +81,14 @@ const DeleteVeterinarian = () => {
   return (
     <div className="mt-4 p-4 border border-gray-300 rounded-lg shadow-md w-10/12 mb-14">
       <div>
-        <label htmlFor="veterinarian" className="block text-sm font-medium text-gray-700">Selecciona Veterinario:</label>
+        <label htmlFor="veterinarian" className="block text-sm font-medium text-gray-700">Select a veterinarian:</label>
         <select
           id="veterinarian"
           value={selectedVeterinarianId}
           onChange={handleChange}
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
-          <option value="">Selecciona un veterinario</option>
+          <option value="">Select a veterinarian</option>
           {veterinarians.map(vet => (
             <option key={vet.id} value={vet.id}>
               {vet.name}
@@ -102,7 +102,7 @@ const DeleteVeterinarian = () => {
           onClick={handleDelete}
           className="inline-flex items-center px-4 py-2 mt-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Eliminar Veterinario
+          Delete Veterinary
         </button>
       </div>
     </div>

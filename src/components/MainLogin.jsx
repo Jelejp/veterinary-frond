@@ -96,18 +96,7 @@ const MainLogin = () => {
     setPassword(event.target.value)
   }
 
-<<<<<<< HEAD
-  return ( // border border-gray-300 
-    <div className='flex flex-col md:flex-row md:items-center min-h-full overflow-y-auto border border-black '>
-      <article className='text-center md:w-1/2 h-full flex flex-col items-center'>
-        <h2 className='font-bold text-3xl lg:text-5xl mb-20 mt-10 '>Login to your account</h2>
-        <form className='flex flex-col items-center gap-8 w-11/12 p-4 border border-black'>
-          <label className='flex w-8/12'>
-            <input onChange={handleUsernameChange} type="email" name='user' required placeholder='EMAIL' className='shadow mx-2 p-4 border rounded-md w-full' />
-          </label>
-          <div className='flex w-8/12 items-center gap-2 relative  border border-black'>
-            <input onChange={handlePasswordChange} type="password" name='password' required placeholder='PASSWORD' className='shadow mx-2 p-4 border rounded-md w-full id_password' />
-=======
+
   return (
     <div className='flex flex-col md:flex-row h-[100vh] lg:h-[100vh] md:h-[100vh] overflow-y-auto '>
       <article className='text-center md:w-1/2 h-full flex flex-col justify-center'>
@@ -118,13 +107,12 @@ const MainLogin = () => {
           </label>
           <div className='flex items-center gap-2 relative'>
             <input onChange={handlePasswordChange} type="password" name='password' required placeholder='PASSWORD' className='shadow mx-2 p-4 rounded-md w-full id_password' />
->>>>>>> newdev
           </div>
-          <div className='flex justify-around items-center gap-2 flex-wrap-reverse  border border-black'>
+          <div className='flex justify-around items-center gap-2 flex-wrap-reverse '>
             <button className='flex justify-center items-center'>
               <small className='text-lg'>Forgot your password?</small>
             </button>
-            <label className='flex justify-center items-center gap-2  border border-black'>
+            <label className='flex justify-center items-center gap-2 '>
               <input type="checkbox" name='id' />
               <small className='text-lg'>Remember me</small>
             </label>
@@ -132,7 +120,7 @@ const MainLogin = () => {
           <button type='button' className='rounded-md max-h-14 font-bold py-2 px-4 bg-[#8BA8C4] m-2 h text-lg text-white cursor-pointer transition duration-200 ease-in-out hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-700 focus-visible:ring-offset-2 active:scale-95 my-4' onClick={handleLogin}>LOG IN</button>
         </form>
       </article>
-      <article className='article-bg md:w-1/2 flex h-full flex-col justify-center items-center  border border-black'>
+      <article className='article-bg md:w-1/2 flex h-full flex-col justify-center items-center '>
         <div className='article-content text-white flex flex-col gap-14 justify-center items-center'>
           <h2 className='font-bold text-gray-700 text-3xl'>New at VetNova?</h2>
           <p className='text-gray-700 text-center text-lg'>Discover the benefits of being part of VetNova</p>

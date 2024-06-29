@@ -33,15 +33,6 @@ export const services = [
       attendedBy: 'Pepita Lopez'
     },
     {
-      name: 'Hospitalisation',
-      image: '/assets/hospitalisation.png', 
-      description: 'Care and monitoring of pets requiring hospitalisation.',
-      requirements: 'Consulta previa',
-      price: 150.00,
-      attendedBy: 'Pepito Perez'
-
-    },
-    {
         name: 'Deworming',
         image: '/assets/deworming.png', 
         description: 'Deworming service to eliminate internal and external parasites, keeping your pet healthy.',

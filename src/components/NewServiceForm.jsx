@@ -3,23 +3,26 @@ import { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
+import { FormGroup, Label, Input, FormText } from 'reactstrap';
 
 const NewServiceForm = () => {
 
-	const [newService, setNewService] = useState([]); // Aquí corregido para usar useState correctamente
-	const [price, setPrice] = useState(0); // Aquí también corregido
-	const [name, setName] = useState(''); // Aquí también corregido
-	const [description, setDescription] = useState(''); // Aquí también corregido
+	const [newService, setNewService] = useState([]);
+	const [price, setPrice] = useState(0);
+	const [name, setName] = useState(''); 
+	const [description, setDescription] = useState('');
+	const [loading, setLoading] = useState(false);
+	const [image, setImage] = useState("");
 	const token = useSelector(store => store.authReducer.token);
 
-	// Estados para manejar los valores del formulario
 	const formData = {
 		name,
 		description,
-		price
+		price,
+		image
 	};
 
-	const handlePriceChange = (e) =>{
+	const handlePriceChange = (e) => {
 		e.preventDefault();
 		setPrice(parseFloat(e.target.value));
 	}
@@ -27,8 +30,9 @@ const NewServiceForm = () => {
 	// Manejar envío del formulario
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(formData)
+		
 		try {
+			console.log(formData)
 			const response = await axios.post('http://localhost:8080/api-veterinary/offerings/create', formData, {
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -52,6 +56,27 @@ const NewServiceForm = () => {
 			});
 		}
 	};
+
+	const uploadImage = async (event) => {
+
+    const files = event.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'Veterinary');
+    setLoading(true);
+
+    const res = await fetch('https://api.cloudinary.com/v1_1/dmioftmku/image/upload', {
+      method: 'POST',
+      body: data,
+    });
+
+    const file = await res.json();
+    setImage(file.secure_url);
+    setLoading(false);
+
+  };
+
+
 	return (
 		<form className="mt-4 p-4 border border-gray-300 rounded-lg shadow-md w-10/12" onSubmit={handleSubmit}>
 			<h3 className="text-lg font-bold mb-4">Create a new Service</h3>
@@ -94,6 +119,21 @@ const NewServiceForm = () => {
 					required
 				/>
 			</div>
+			<FormGroup>
+				<Label for="exampleFile">
+					File
+				</Label>
+				<Input
+					id="exampleFile"
+					name="file"
+					type="file"
+					onChange={uploadImage}
+				/>
+				{loading ? (<h3>Uploading Image...</h3>) : (<img src={image} style={{ width: "300px" }} />)}
+				<FormText>
+					Only *.jpeg and *.png images will be accepted
+				</FormText>
+			</FormGroup>
 			<div className="flex justify-end">
 				<button
 					type="submit"

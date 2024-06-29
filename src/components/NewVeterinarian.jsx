@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import { FormGroup, Label, Input, FormText } from 'reactstrap';
 
 const NewVeterinarian = () => {
   const [name, setName] = useState('');
@@ -9,6 +10,9 @@ const NewVeterinarian = () => {
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const token = useSelector((state) => state.authReducer.token);
 
   const handleSubmit = async (e) => {
@@ -19,15 +23,16 @@ const NewVeterinarian = () => {
       specialty,
       address,
       phone,
-      email
+      email,
+      image
     };
 
     try {
+      console.log(veterinarianData);
       const response = await axios.post('http://localhost:8080/api-veterinarian/veterinarians/new', veterinarianData,
         {
           headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
           }
         }
       );
@@ -49,6 +54,25 @@ const NewVeterinarian = () => {
         confirmButtonText: 'Ok'
       })
     }
+  };
+
+  const uploadImage = async (event) => {
+
+    const files = event.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'Veterinary');
+    setLoading(true);
+
+    const res = await fetch('https://api.cloudinary.com/v1_1/dmioftmku/image/upload', {
+      method: 'POST',
+      body: data,
+    });
+
+    const file = await res.json();
+    setImage(file.secure_url);
+    setLoading(false);
+
   };
 
   return (
@@ -108,6 +132,21 @@ const NewVeterinarian = () => {
           required
         />
       </div>
+      <FormGroup>
+        <Label for="exampleFile">
+          File
+        </Label>
+        <Input
+          id="exampleFile"
+          name="file"
+          type="file"
+          onChange={uploadImage}
+        />
+        {loading ? (<h3>Uploading Image...</h3>) : (<img src={image} style={{ width: "300px" }} />)}
+        <FormText>
+          Only *.jpeg and *.png images will be accepted
+        </FormText>
+      </FormGroup>
       <div className="flex justify-end">
         <button style={{ border: '1px solid black' }}
           type="submit"
@@ -118,7 +157,7 @@ const NewVeterinarian = () => {
       </div>
     </form>
   );
-  
+
 };
 
 export default NewVeterinarian;
