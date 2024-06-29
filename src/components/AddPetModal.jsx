@@ -33,18 +33,28 @@ const AddPetModal = ({ addPet }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        const petData = Object.fromEntries(formData.entries());
-        
-        petData.image = image;
-        addPet(petData);
-        console.log(petData);
-
-        Swal.fire({
-            title: 'Success',
-            text: 'Pet added successfully!',
-            icon: 'success',
-            confirmButtonText: 'Ok',
-        });
+        const petData = {
+            petName: formData.get('petName'),
+            petAge: formData.get('petAge'),
+            species: formData.get('species'),
+            breed: formData.get('breed'),
+            petSize: formData.get('petSize').toUpperCase(),
+            specialTreatment: formData.get('specialTreatment'),
+            image: image
+        };
+        try {
+            const response = await axios.post('http://localhost:8080/api-veterinary/pets/new', petData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+            addPet(petData); // This assumes addPet adds the pet to your local state or context
+            Swal.fire({
+                title: 'Success',
+                text: 'Pet added successfully!',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+            });
 
         onClose();
     }

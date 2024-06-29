@@ -9,17 +9,11 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
   const [selectedPetId, setSelectedPetId] = useState('');
   const [availableSlots, setAvailableSlots] = useState([]);
   const [selectedSlotId, setSelectedSlotId] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
 
   useEffect(() => {
     handleFetchAvailableSlots(serviceId);
   }, [serviceId]);
-
-  const formatDateTime = (dateTimeString) => {
-    const date = new Date(dateTimeString);
-    const formattedDate = date.toLocaleDateString();
-    const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    return `${formattedDate} at ${formattedTime}`;
-  };
 
   const handleFetchAvailableSlots = async (serviceId) => {
     try {
@@ -29,9 +23,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
           Authorization: `Bearer ${token}`
         }
       });
-      console.log(response.data.availableSlots);
-      const availableSlots = response.data.availableSlots;
-      setAvailableSlots(availableSlots);
+      setAvailableSlots(response.data.availableSlots);
     } catch (error) {
       console.log(error);
     }
@@ -69,12 +61,11 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
         throw new Error('Error creating appointment');
       }
 
-      const formattedDateTime = formatDateTime(dateTime);
+      const formattedDateTime = new Date(dateTime).toLocaleString([], { hour: '2-digit', minute: '2-digit' });
 
-      // Confirmación personalizada con SweetAlert2
       const confirmation = await Swal.fire({
         title: 'Confirm Appointment',
-        html: `Are you sure you want to book this appointment?<br/><br/>Date: ${formattedDateTime}<br/>Description: ${description}`,
+        html: `Are you sure you want to book this appointment?<br/><br/>Date: ${ formatDate (dateTime)} at ${ formattedDateTime}<br/>Description: ${description}`,
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Confirm',
@@ -83,7 +74,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 
       if (confirmation.isConfirmed) {
         Swal.fire({
-          title: `Your turn for ${serviceName} was correctly booked for ${formattedDateTime}.`,
+          title: `Your appointment for ${serviceName} was successfully booked for ${ formatDate (dateTime)} at ${ formattedDateTime}.`,
           icon: 'success'
         });
 
@@ -113,6 +104,20 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
     }
   };
 
+  const formatDate = (dateString) => {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+
+  // Sort dates in the select
+  const uniqueDates = [...new Set(availableSlots.map(slot => slot.date))]
+    .sort((a, b) => new Date(a) - new Date(b));
+
+  // Filter and sort available hours
+  const filteredSlots = availableSlots
+    .filter(slot => slot.date === selectedDate)
+    .sort((a, b) => a.availableHours.localeCompare(b.availableHours));
+
   return (
     <Box as="form" onSubmit={handleSubmit} p={4} maxWidth="600px" mx="auto" borderWidth="1px" borderRadius="lg" overflow="hidden">
       <FormControl id="petSelect" mb={4}>
@@ -136,6 +141,15 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
           required
         />
       </FormControl>
+      <FormControl id="dateSelect" mb={4}>
+        <FormLabel>Select Date</FormLabel>
+        <Select value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} required>
+          <option value="">Select a date</option>
+          {uniqueDates.map((date, index) => (
+            <option key={index} value={date}>{formatDate(date)}</option>
+          ))}
+        </Select>
+      </FormControl>
       <Flex justifyContent="space-between" mb={4}>
         <Flex alignItems="center">
           <Circle size="10px" className="bg-[#8fb0ff]" mr={2} />
@@ -147,7 +161,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
         </Flex>
       </Flex>
       <SimpleGrid columns={[3, null, 4]} spacing={2} mb={2}>
-        {availableSlots.map(slot => (
+        {filteredSlots.map(slot => (
           <Box
             key={slot.id}
             onClick={() => handleSlotSelection(slot)}
@@ -166,7 +180,6 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
             opacity={slot.available ? 1 : 0.6}
             fontSize="xs"
           >
-            <Text>{slot.date}</Text>
             <Text>{slot.availableHours}</Text>
           </Box>
         ))}
