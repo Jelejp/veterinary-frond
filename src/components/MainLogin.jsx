@@ -98,16 +98,16 @@ const MainLogin = () => {
 
 
   return (
-    <div className='flex flex-col md:flex-row h-[100vh] lg:h-[100vh] md:h-[100vh] overflow-y-auto '>
+    <div className='flex flex-col md:flex-row h-[100vh] lg:h-[100vh] md:h-[100vh] '>
       <article className='text-center md:w-1/2 h-full flex flex-col justify-center'>
-        <h2 className='font-bold text-3xl mb-4'>Login to your account</h2>
-        <form className='flex flex-col gap-8'>
-          <label className='flex'>
+        <h2 className='font-bold text-3xl my-10 m lg:mt-4 lg:mb-8'>Login to your account</h2>
+        <form className='flex flex-col items-center gap-8'>
+          <label className='flex w-8/12 lg:w-6/12'>
             <input onChange={handleUsernameChange} type="email" name='user' required placeholder='EMAIL' className='shadow mx-2 p-4 rounded-md w-full' />
           </label>
-          <div className='flex items-center gap-2 relative'>
+          <label className='flex w-8/12 lg:w-6/12 items-center gap-2 relative'>
             <input onChange={handlePasswordChange} type="password" name='password' required placeholder='PASSWORD' className='shadow mx-2 p-4 rounded-md w-full id_password' />
-          </div>
+          </label>
           <div className='flex justify-around items-center gap-2 flex-wrap-reverse '>
             <button className='flex justify-center items-center'>
               <small className='text-lg'>Forgot your password?</small>

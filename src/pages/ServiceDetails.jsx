@@ -7,12 +7,12 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 const ServiceDetails = () => {
+  
   const { id } = useParams();
   const [service, setService] = useState(null);
   const [pets, setPets] = useState([]);
   const [selectedPet, setSelectedPet] = useState(null);
   const [calculatedPrice, setCalculatedPrice] = useState(null);
-  const [additionalChargeMessage, setAdditionalChargeMessage] = useState('');
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const token = useSelector(store => store.authReducer.token);
 
@@ -81,12 +81,6 @@ const ServiceDetails = () => {
       setSelectedPet(selectedPet);
       const updatedPrice = calculatePrice(selectedPet.animalSize);
       setCalculatedPrice(updatedPrice);
-
-      if (selectedPet.animalSize !== 'SMALL') {
-        setAdditionalChargeMessage(`Please note that additional charges apply based on the size of your pet. The updated price is $${updatedPrice.toLocaleString()}.`);
-      } else {
-        setAdditionalChargeMessage('');
-      }
     }
   };
 
@@ -107,11 +101,6 @@ const ServiceDetails = () => {
             <h1 className="text-3xl font-bold text-[#5aa6ec] mb-4">{service.name}</h1>
             <p className="text-lg text-gray-700 mb-4">{service.description}</p>
             <h2 className="text-3xl font-bold text-red-500  mb-2">Price: ${calculatedPrice ? calculatedPrice.toLocaleString() : service.price.toLocaleString()}</h2>
-
-            {additionalChargeMessage && (
-              <p className="text-red-500 mb-4">{additionalChargeMessage}</p>
-            )}
-
             <h2 className="text-xl font-bold text-[#5aa6ec] my-4">Book your appointment:</h2>
             <AppointmentTable
               setSelectedAppointment={setSelectedAppointment}

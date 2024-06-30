@@ -3,7 +3,7 @@ const activePage = {
     Veterinary: "/assets/veterinary-active.png",
     Account: "/assets/user-active.png",
     Logout: "/assets/logout-active.png",
-    admin: "/assets/settings-active.png"
+    Admin: "/assets/settings-active.png"
 };
 
 export const linksUser = [

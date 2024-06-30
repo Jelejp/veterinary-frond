@@ -4,7 +4,7 @@ import MainLogin from '../components/MainLogin'
 
 const Login = () => {
     return (
-        <div className='w-full h-screen overflow-y-hidden'>
+        <div className='w-full min-h-screen overflow-y-hidden'>
             <div>
                 <PublicNav />
             </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Select, SimpleGrid, Flex, Text, Circle } from '@chakra-ui/react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets, handlePetChange }) => {
   const [dateTime, setDateTime] = useState('');
@@ -10,20 +11,22 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
   const [availableSlots, setAvailableSlots] = useState([]);
   const [selectedSlotId, setSelectedSlotId] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
+  const token = useSelector(store => store.authReducer.token);
 
   useEffect(() => {
     handleFetchAvailableSlots(serviceId);
   }, [serviceId]);
 
+  
   const handleFetchAvailableSlots = async (serviceId) => {
     try {
-      const token = localStorage.getItem('token');
       const response = await axios.get(`http://localhost:8080/api-veterinary/offerings/${serviceId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
       setAvailableSlots(response.data.availableSlots);
+      console.log(response.data.availableSlots)
     } catch (error) {
       console.log(error);
     }
@@ -31,11 +34,47 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 
   const handleSlotSelection = (slot) => {
     if (slot.available) {
-      const localDateTime = new Date(`${slot.date}T${slot.availableHours}:00`);
-      setDateTime(localDateTime.toISOString());
+      // Verifica que `slot.date` y `slot.availableHours` son cadenas válidas
+      if (!slot.date || !slot.availableHours) {
+        console.error('Invalid slot data:', slot);
+        return;
+      }
+  
+      // Verifica el formato de `slot.availableHours` y convierte `03:00 PM` a `15:00`
+      const convertTo24HourFormat = (time12h) => {
+        const [time, modifier] = time12h.split(' ');
+        let [hours, minutes] = time.split(':');
+        if (modifier === 'PM' && hours !== '12') {
+          hours = (parseInt(hours, 10) + 12).toString();
+        }
+        if (modifier === 'AM' && hours === '12') {
+          hours = '00';
+        }
+        return `${hours.padStart(2, '0')}:${minutes}`;
+      };
+  
+      const availableHours24 = convertTo24HourFormat(slot.availableHours);
+      console.log(`Converted Available Hours: ${availableHours24}`);
+  
+      // Construye la cadena de fecha y hora en formato correcto
+      const dateTimeString = `${slot.date}T${availableHours24}:00`;
+  
+      // Verifica si la cadena de fecha y hora es válida
+      const localDateTime = new Date(dateTimeString);
+      if (isNaN(localDateTime.getTime())) {
+        console.error('Invalid date-time string:', dateTimeString);
+        return;
+      }
+  
+      // Formatea `LocalDateTime` para enviar al backend
+      const formattedDateTime = localDateTime.toISOString().slice(0, 19); 
+  
+      console.log(`Formatted Local DateTime: ${formattedDateTime}`);
+      setDateTime(formattedDateTime);
       setSelectedSlotId(slot.id);
     }
   };
+  
 
   const handleCreateAppointment = () => {
     const appointmentData = {
@@ -57,7 +96,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
     }).then(async (confirmation) => {
       if (confirmation.isConfirmed) {
         try {
-          const token = localStorage.getItem('token');
+          console.log(appointmentData)
           const response = await axios.post('http://localhost:8080/api-veterinary/appointments/new', appointmentData, {
             headers: {
               'Content-Type': 'application/json',
@@ -150,6 +189,10 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
           <Circle size="10px" bg="gray" mr={2} />
           <Text className='mt-[12px]'>Occupied</Text>
         </Flex>
+        <Flex alignItems="center">
+          <Circle size="10px" bg="red" mr={2} />
+          <Text className='mt-[12px]'>Selected</Text>
+        </Flex>
       </Flex>
       <SimpleGrid columns={[3, null, 4]} spacing={2} mb={2}>
         {filteredSlots.map(slot => (
@@ -158,7 +201,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
             onClick={() => handleSlotSelection(slot)}
             className={
               selectedSlotId === slot.id
-                ? 'bg-[#3b8bd5]'
+                ? 'bg-[#D32F2F]'
                 : slot.available
                 ? 'bg-[#6ca8e0]'
                 : 'bg-gray-700'
@@ -169,7 +212,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
             textAlign="center"
             cursor={slot.available ? 'pointer' : 'not-allowed'}
             opacity={slot.available ? 1 : 0.6}
-            fontSize="xs"
+            fontSize="xl"
           >
             <Text>{slot.availableHours}</Text>
           </Box>

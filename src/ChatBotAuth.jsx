@@ -7,22 +7,22 @@ import { ThemeProvider } from 'styled-components';
 const steps = [
   {
     id: '1',
-    message: 'Hola, bienvenido a la Clínica VetNova. ¿En qué puedo ayudarte hoy?',
+    message: 'Hello, welcome to VetNova Clinic. How can I assist you today?',
     trigger: 'options',
   },
   {
     id: 'options',
     options: [
-      { value: 'pedir_turno', label: 'Pedir Turno', trigger: 'pedir_turno' },
-      { value: 'ver_cuenta', label: 'Ver Cuenta', trigger: 'ver_cuenta' },
-      { value: 'conocer_veterinarios', label: 'Conocer a nuestros Veterinarios', trigger: 'conocer_veterinarios' },
+      { value: 'pedir_turno', label: 'Request an Appointment', trigger: 'pedir_turno' },
+      { value: 'ver_cuenta', label: 'View Account', trigger: 'ver_cuenta' },
+      { value: 'conocer_veterinarios', label: 'Meet Our Veterinarians', trigger: 'conocer_veterinarios' },
     ],
   },
   {
     id: 'pedir_turno',
     component: (
       <div style={{ fontFamily: 'Arial, Helvetica, sans-serif', color: '#fff', backgroundColor: '#8BA8C4', padding: '10px', borderRadius: '10px', display: 'inline-block', maxWidth: '100%', wordBreak: 'break-word' }}>
-        Para sacar un turno, presiona en el servicio a seleccionar en "view details" y luego verifica si el turno en el horario deseado está disponible.
+        To request an appointment, click on the service you want under "view details" and then check if the appointment is available at your desired time.
         <br /><br />
         <Link 
           to="/auth/services"
@@ -37,7 +37,7 @@ const steps = [
             textDecoration: 'none',
             display: 'inline-block'
           }}>
-          Ir a Servicios
+          Go to Services
         </Link>
       </div>
     ),
@@ -47,7 +47,7 @@ const steps = [
     id: 'ver_cuenta',
     component: (
       <div style={{ fontFamily: 'Arial, Helvetica, sans-serif', color: '#fff', backgroundColor: '#8BA8C4', padding: '10px', borderRadius: '10px', display: 'inline-block', maxWidth: '100%', wordBreak: 'break-word' }}>
-        Para conocer el detalle de tu cuenta, registrar a una mascota nueva, o ver los detalles de tus servicios ve a la sección de cuenta.
+        To view the details of your account, register a new pet, or see your service details, go to the account section.
         <br /><br />
         <Link 
           to="/auth/account"
@@ -62,7 +62,7 @@ const steps = [
             textDecoration: 'none',
             display: 'inline-block'
           }}>
-          Ir a Cuenta
+          Go to Account
         </Link>
       </div>
     ),
@@ -72,7 +72,7 @@ const steps = [
     id: 'conocer_veterinarios',
     component: (
       <div style={{ fontFamily: 'Arial, Helvetica, sans-serif', color: '#fff', backgroundColor: '#8BA8C4', padding: '10px', borderRadius: '10px', display: 'inline-block', maxWidth: '100%', wordBreak: 'break-word' }}>
-        Para ver nuestro equipo de trabajo, presiona aquí.
+        To see our team of professionals, click here.
         <br /><br />
         <Link 
           to="/auth/veterinary"
@@ -87,7 +87,7 @@ const steps = [
             textDecoration: 'none',
             display: 'inline-block'
           }}>
-          Ir a Equipo de Trabajo
+          Go to Our Team
         </Link>
       </div>
     ),
@@ -95,7 +95,7 @@ const steps = [
   },
   {
     id: 'final',
-    message: '¿Necesitas algo más?',
+    message: 'Do you need anything else?',
     trigger: 'options',
   },
 ];

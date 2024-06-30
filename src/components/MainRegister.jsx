@@ -119,25 +119,25 @@ const MainRegister = () => {
 		}
 	}
 	return (
-		<div className='article-bgg flex flex-col md:flex-row md:justify-around h-screen overflow-y-auto'>
-			<article className='text-center md:w-1/2 lg:w-1/2 h-full flex flex-col justify-center'>
-				<h2 className='text-3xl mb-4 font-bold my-10'>Enter your details</h2>
-				<form className='flex flex-col items-center gap-8' onSubmit={handleSubmit}>
-					<div className='w-full flex gap-2 justify-center items-center border'>
-						<label className='flex'>
+		<div className='flex flex-col md:flex-row min-h-screen'>
+			<div className='flex flex-col text-center md:w-1/2 h-full justify-around'>
+				<h2 className='text-3xl mt-10 mb-8 md:mb0 md:my-20 font-bold '>Enter your details</h2>
+				<form className='flex w-full flex-col items-center gap-8 md:mt-10' onSubmit={handleSubmit}>
+					<div className='w-11/12 lg:w-8/12 flex gap-2 justify-center items-center'>
+						<label className='flex justify-center w-full'>
 							<input className='p-4 mx-2 border rounded-md shadow w-full' type="text" name='FirstName' placeholder='FIRST NAME' onChange={(e) => setFirstName(e.target.value)} />
 						</label>
-						<label className='flex'>
+						<label className='flex justify-center w-full'>
 							<input className='p-4 mx-2 border rounded-md shadow w-full' type="text" name='LastName' placeholder='LAST NAME' onChange={(e) => setLastName(e.target.value)} />
 						</label>
 					</div>
-					<label className='flex border w-8/12'>
+					<label className='flex w-9/12 lg:w-8/12 lg:6/12'>
 						<input className='mx-2 p-4 border rounded-md shadow w-full' type="text" name='PhoneNumber' placeholder='PHONE NUMBER' required onChange={(e) => setPhoneNumber(e.target.value)} />
 					</label>
-					<label className='flex border w-8/12'>
+					<label className='flex w-9/12 lg:w-8/12 lg:6/12'>
 						<input className='mx-2 p-4 border rounded-md shadow w-full' type="email" name='user' required placeholder='EMAIL' onChange={(e) => setEmail(e.target.value)} />
 					</label>
-					<div className='flex border w-8/12'>
+					<div className='flex w-9/12 lg:w-8/12 lg:6/12'>
 						<input className='mx-2 p-4 border rounded-md shadow w-full id_password' type="password" name='password' required placeholder='PASSWORD' onChange={handlePasswordChange} />
 					</div>
 					<button type='submit' className='rounded-md max-h-14 font-bold py-2 px-4 bg-[#8BA8C4] m-2 h text-lg text-white cursor-pointer transition duration-200 ease-in-out hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-700 focus-visible:ring-offset-2 active:scale-95 my-4'>
@@ -145,25 +145,20 @@ const MainRegister = () => {
 					</button>
 				</form>
 				<ToastContainer />
-			</article>
-			
-			<div className='text-white flex flex-col gap-8 justify-center items-center'>
-					<h2 className='text-3xl text-gray-700 w-full'>Already have an account?</h2>
-					<div className='flex justify-center items-center gap-4 w-full'>
-						<p className='text-gray-700 text-center text-lg p-4'>Login with your account</p>
-						<Link className='text-blue-800 font-bold italic text-2xl' to={"/Login"}>Log in</Link>
-					</div>
+				<div className='block md:hidden flex flex-col justify-around items-center w-full py-8 bg-cover bg-center  mt-10' style={{ backgroundImage: "url('/assets/register-img.png')" }}>
+					<h2 className='text-3xl text-gray-700 w-full text-center mt-4'>Already have an account?</h2>
+					<Link className='text-blue-800 font-bold italic text-lg' to={"/Login"}>Log in</Link>
 				</div>
+
+			</div>
+			<div className='hidden md:flex md:w-1/2 h-full flex-col justify-center items-center bg-cover bg-center' style={{ backgroundImage: "url('/assets/register-img.png')" }}>
+				<div className='article-content flex justify-around items-center w-full'>
+					<h2 className='text-3xl text-gray-700 w-full text-center'>Already have an account?</h2>
+					<Link className='text-blue-800 font-bold italic text-lg' to={"/Login"}>Log in</Link>
+				</div>
+			</div>
 		</div>
 	)
 }
 
 export default MainRegister
-
-{/* < article className = 'article-bgg w-full max-h-1/12 flex flex-col justify-center items-center text-center' >
-		<div className='article-content text-white flex flex-col gap-8 justify-center items-center h-full'>
-			<h2 className='text-3xl text-gray-700'>Already have an account?</h2>
-			<p className='text-center text-lg text-gray-700'>Login with your account</p>
-			<Link className='text-blue-800 mb-5 font-bold text-2xl hover:underline hover:shadow-xl' to={"/Login"}>Log in</Link>
-		</div>
-			</article > */}
