@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Select, SimpleGrid, Flex, Text, Circle } from '@chakra-ui/react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets, handlePetChange }) => {
   const [dateTime, setDateTime] = useState('');
@@ -17,7 +18,6 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 
   const handleFetchAvailableSlots = async (serviceId) => {
     try {
-      const token = localStorage.getItem('token');
       const response = await axios.get(`http://localhost:8080/api-veterinary/offerings/${serviceId}`, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -112,6 +112,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 
   return (
     <Box as="form" onSubmit={(e) => e.preventDefault()} p={4} maxWidth="600px" mx="auto" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box as="form" onSubmit={(e) => e.preventDefault()} p={4} maxWidth="600px" mx="auto" borderWidth="1px" borderRadius="lg" overflow="hidden">
       <FormControl id="petSelect" mb={4}>
         <FormLabel>Select Pet</FormLabel>
         <Select value={selectedPetId} onChange={(e) => {
@@ -142,6 +143,15 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
           ))}
         </Select>
       </FormControl>
+      <FormControl id="dateSelect" mb={4}>
+        <FormLabel>Select Date</FormLabel>
+        <Select value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} required>
+          <option value="">Select a date</option>
+          {uniqueDates.map((date, index) => (
+            <option key={index} value={date}>{formatDate(date)}</option>
+          ))}
+        </Select>
+      </FormControl>
       <Flex justifyContent="space-between" mb={4}>
         <Flex alignItems="center">
           <Circle size="10px" className="bg-[#8fb0ff]" mr={2} />
@@ -151,15 +161,20 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
           <Circle size="10px" bg="gray" mr={2} />
           <Text className='mt-[12px]'>Occupied</Text>
         </Flex>
+        <Flex alignItems="center">
+          <Circle size="10px" bg="red" mr={2} />
+          <Text className='mt-[12px]'>Selected</Text>
+        </Flex>
       </Flex>
       <SimpleGrid columns={[3, null, 4]} spacing={2} mb={2}>
+        {filteredSlots.map(slot => (
         {filteredSlots.map(slot => (
           <Box
             key={slot.id}
             onClick={() => handleSlotSelection(slot)}
             className={
               selectedSlotId === slot.id
-                ? 'bg-[#3b8bd5]'
+                ? 'bg-[#D32F2F]'
                 : slot.available
                 ? 'bg-[#6ca8e0]'
                 : 'bg-gray-700'
@@ -170,12 +185,13 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
             textAlign="center"
             cursor={slot.available ? 'pointer' : 'not-allowed'}
             opacity={slot.available ? 1 : 0.6}
-            fontSize="xs"
+            fontSize="xl"
           >
             <Text>{slot.availableHours}</Text>
           </Box>
         ))}
       </SimpleGrid>
+      <Button onClick={handleCreateAppointment} colorScheme="blue" mt={4} isDisabled={!dateTime}>
       <Button onClick={handleCreateAppointment} colorScheme="blue" mt={4} isDisabled={!dateTime}>
         Create Appointment
       </Button>
@@ -184,3 +200,4 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 };
 
 export default AppointmentTable;
+

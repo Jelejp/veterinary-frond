@@ -18,7 +18,6 @@ const Home = () => {
                 <PublicFooter/>
             </div>
         </div>
-        
     )
 }
 

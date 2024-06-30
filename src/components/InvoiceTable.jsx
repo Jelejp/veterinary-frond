@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button } from '@chakra-ui/react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const InvoiceTable = () => {
-    const [selectedInvoice, setSelectedInvoice] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [invoices, setInvoices] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+	const [selectedInvoice, setSelectedInvoice] = useState(null);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [invoices, setInvoices] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const token = useSelector(store => store.authReducer.token);
 
-    const fetchInvoices = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                throw new Error("No token found in localStorage");
-            }
 
-            const response = await axios.get('http://localhost:8080/api-veterinary/current', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+	const fetchInvoices = async () => {
+		try {
+			const response = await axios.get('http://localhost:8080/api-veterinary/current', {
+				headers: {
+					Authorization: `Bearer ${token}`
+				}
+			});
 
             const account = response.data.account;
             if (account && account.chargedInvoices) {
@@ -40,19 +38,19 @@ const InvoiceTable = () => {
         fetchInvoices();
     }, []);
 
-    const openModal = (invoice) => {
-        setSelectedInvoice(invoice);
-        setIsModalOpen(true);
-    };
+	const openModal = (invoice) => {
+		setSelectedInvoice(invoice);
+		setIsModalOpen(true);
+	};
 
-    const closeModal = () => {
-        setSelectedInvoice(null);
-        setIsModalOpen(false);
-    };
+	const closeModal = () => {
+		setSelectedInvoice(null);
+		setIsModalOpen(false);
+	};
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 
     if (error) {
         return <div>{error}</div>;
@@ -91,30 +89,30 @@ const InvoiceTable = () => {
                 </tbody>
             </table>
 
-            <Modal isOpen={isModalOpen} onClose={closeModal} isCentered>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Invoice Details</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        {selectedInvoice && (
-                            <div>
-                                <p><strong>ID:</strong> {selectedInvoice.id}</p>
-                                <p><strong>Date:</strong> {new Date(selectedInvoice.issuedOn).toLocaleString()}</p>
-                                <p><strong>Amount:</strong> ${selectedInvoice.amount.toFixed(2)}</p>
-                                <p><strong>Status:</strong> {selectedInvoice.status === 'CHARGED' ? 'Paid' : 'Unpaid'}</p>
-                                <p><strong>Service:</strong> {selectedInvoice.offering}</p>
-                                <p><strong>Description:</strong> {selectedInvoice.offeringDescription}</p>
-                            </div>
-                        )}
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button onClick={closeModal}>Close</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-        </div>
-    );
+			<Modal isOpen={isModalOpen} onClose={closeModal} isCentered>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>Invoice Details</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody>
+						{selectedInvoice && (
+							<div>
+								<p><strong>ID:</strong> {selectedInvoice.id}</p>
+								<p><strong>Date:</strong> {new Date(selectedInvoice.issuedOn).toLocaleString()}</p>
+								<p><strong>Amount:</strong> ${selectedInvoice.amount.toFixed(2)}</p>
+								<p><strong>Status:</strong> {selectedInvoice.status === 'CHARGED' ? 'Paid' : 'Unpaid'}</p>
+								<p><strong>Service:</strong> {selectedInvoice.offering}</p>
+								<p><strong>Description:</strong> {selectedInvoice.offeringDescription}</p>
+							</div>
+						)}
+					</ModalBody>
+					<ModalFooter>
+						<Button onClick={closeModal}>Close</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+		</div>
+	);
 };
 
 export default InvoiceTable;

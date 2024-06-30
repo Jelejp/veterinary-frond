@@ -4,28 +4,39 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import { FormGroup, FormText, Label } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const AddPetModal = ({ addPet }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const [image, setImage] = useState("")
-    const [loading , setLoading] = useState(false)
+const AddPetModal = ({ isModalOpen, setIsModalOpen }) => {
+    
+    const token = useSelector(store => store.authReducer.token)
+    const { isOpen, onOpen, onClose } = useDisclosure({
+        isOpen: isModalOpen,
+        onClose: () => {
+            setIsModalOpen(false);
+            onClose();
+        }
+    });
+
+    const [image, setImage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const upLoadImage = async (event) => {
-        const files = event.target.files
-        const data = new FormData()
-        data.append('file', files[0])
-        data.append('upload_preset', 'Veterinary')
-        setLoading(true)
+
+        const files = event.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload_preset', 'Veterinary');
+        setLoading(true);
         const res = await fetch('https://api.cloudinary.com/v1_1/dmioftmku/image/upload', {
-            method: 'POST', 
+            method: 'POST',
             body: data,
-        })
-        const file = await res.json()
-        console.log(res)
-        setImage(file.secure_url)
-        console.log(file.secure_url)
-        setLoading(false)
-    }
+        });
+        const file = await res.json();
+        setImage(file.secure_url);
+        setLoading(false);
+        
+    };
 
     const [overlay, setOverlay] = useState(
         <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />
@@ -42,23 +53,20 @@ const AddPetModal = ({ addPet }) => {
             animalSize: formData.get('petSize').toUpperCase(),
             specialTreatment: formData.get('specialTreatment'),
             imageUrl: image
-        }
-        console.log(petData)
+        };
         try {
-            const token = localStorage.getItem('token');
             const response = await axios.post('http://localhost:8080/api-veterinary/pets/new', petData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
-            })
-            addPet(response.data);
+            });
             Swal.fire({
                 title: 'Success',
                 text: 'Pet added successfully!',
                 icon: 'success',
                 confirmButtonText: 'Ok',
             });
-            onClose();
+            setIsModalOpen(false); // Close the modal
         } catch (error) {
             Swal.fire({
                 title: 'Error',
@@ -68,16 +76,17 @@ const AddPetModal = ({ addPet }) => {
             });
             console.error("Error adding pet:", error);
         }
-    }
+    };
 
     return (
         <>
-            <Button
+            <Button className='mt-4'
                 onClick={() => {
                     setOverlay(
                         <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />
                     );
                     onOpen();
+                    setIsModalOpen(true);
                 }}
             >
                 Add Pet
@@ -86,7 +95,7 @@ const AddPetModal = ({ addPet }) => {
                 {overlay}
                 <ModalContent>
                     <ModalHeader>Add New Pet</ModalHeader>
-                    <ModalCloseButton />
+                    <ModalCloseButton onClick={() => setIsModalOpen(false)} />
                     <ModalBody>
                         <form id="add-pet-form" onSubmit={handleSubmit}>
                             <FormControl isRequired>
@@ -128,9 +137,9 @@ const AddPetModal = ({ addPet }) => {
                                     type="file"
                                     onChange={upLoadImage}
                                 />
-                                {loading ? (<h3>Uploadin Image...</h3>) : (<img src={image} style={{width: "300px"}}/>)}
+                                {loading ? (<h3>Uploading Image...</h3>) : (<img src={image} style={{ width: "300px" }} />)}
                                 <FormText>
-                                    This is some placeholder block-level help text for the above input. It‘s a bit lighter and easily wraps to a new line.
+                                    This is some placeholder block-level help text for the above input. It’s a bit lighter and easily wraps to a new line.
                                 </FormText>
                             </FormGroup>
                         </form>
@@ -139,7 +148,7 @@ const AddPetModal = ({ addPet }) => {
                         <Button colorScheme="blue" mr={3} form="add-pet-form" type="submit">
                             Add Pet
                         </Button>
-                        <Button onClick={onClose}>Cancel</Button>
+                        <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
