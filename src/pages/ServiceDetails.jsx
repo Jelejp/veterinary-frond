@@ -4,6 +4,7 @@ import AppointmentTable from '../components/AppointmentTable';
 import AuthLayout from '../layout/AuthLayout';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import {services as predefinedServices} from '../utils/serviceList'
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -34,9 +35,17 @@ const ServiceDetails = () => {
           }
         });
 
-        setService(serviceResponse.data);
+        const apiService = serviceResponse.data;
+        const predefinedService = predefinedServices.find(ps => ps.name === apiService.name);
+
+        const combinedService = {
+          ...apiService,
+          image: predefinedService ? predefinedService.image : '/assets/surgery.png' // Ruta por defecto si no se encuentra
+        };
+
+        setService(combinedService);
         setPets(clientResponse.data.pets);
-        setCalculatedPrice(serviceResponse.data.price);
+        setCalculatedPrice(combinedService.price);
 
       } catch (error) {
         console.error("Error fetching data:", error);

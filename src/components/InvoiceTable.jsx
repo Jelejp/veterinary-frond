@@ -9,7 +9,6 @@ const InvoiceTable = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-
     const fetchInvoices = async () => {
         try {
             const token = localStorage.getItem('token');
@@ -23,7 +22,6 @@ const InvoiceTable = () => {
                 }
             });
 
-            console.log();
             const account = response.data.account;
             if (account && account.chargedInvoices) {
                 setInvoices(account.chargedInvoices);
@@ -38,8 +36,7 @@ const InvoiceTable = () => {
         }
     };
 
-    useEffect(() => {  
-
+    useEffect(() => {
         fetchInvoices();
     }, []);
 
@@ -61,32 +58,36 @@ const InvoiceTable = () => {
         return <div>{error}</div>;
     }
 
-    if (invoices.length === 0) {
-        return <div>No invoices found.</div>;
-    }
-
     return (
-        <div className="mb-6">
-            <table className="min-w-full divide-y divide-[#FAE7D5]">
+        <div className="mb-6 overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-[#FAE7D5]">
                     <tr>
-                        <th className="py-2 px-4">Action</th>
-                        <th className="py-2 px-4">Date</th>
-                        <th className="py-2 px-4">Amount</th>
-                        <th className="py-2 px-4">Status</th>
+                        <th className="py-2 px-4 sm:px-6 text-center">Action</th>
+                        <th className="py-2 px-4 sm:px-6 text-center">Date</th>
+                        <th className="py-2 px-4 sm:px-6 text-center">Amount</th>
+                        <th className="py-2 px-4 sm:px-6 text-center">Status</th>
                     </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-[#FAE7D5]">
-                    {invoices.map((invoice) => (
-                        <tr key={invoice.id}>
-                            <td className="py-2 px-4 text-center">
-                                <Button onClick={() => openModal(invoice)}>View</Button>
+                <tbody className="bg-white divide-y divide-gray-200">
+                    {invoices.length === 0 ? (
+                        <tr>
+                            <td colSpan="4" className="py-4 px-6 text-center text-gray-500">
+                                No invoices found.
                             </td>
-                            <td className="py-2 px-4 text-center">{new Date(invoice.issuedOn).toLocaleDateString()}</td>
-                            <td className="py-2 px-4 text-center">${invoice.amount.toFixed(2)}</td>
-                            <td className="py-2 px-4 text-center">{invoice.status === 'CHARGED' ? 'Paid' : 'Unpaid'}</td>
                         </tr>
-                    ))}
+                    ) : (
+                        invoices.map((invoice) => (
+                            <tr key={invoice.id}>
+                                <td className="py-2 px-4 sm:px-6 text-center">
+                                    <Button onClick={() => openModal(invoice)}>View</Button>
+                                </td>
+                                <td className="py-2 px-4 sm:px-6 text-center">{new Date(invoice.issuedOn).toLocaleDateString()}</td>
+                                <td className="py-2 px-4 sm:px-6 text-center">${invoice.amount.toFixed(2)}</td>
+                                <td className="py-2 px-4 sm:px-6 text-center">{invoice.status === 'CHARGED' ? 'Paid' : 'Unpaid'}</td>
+                            </tr>
+                        ))
+                    )}
                 </tbody>
             </table>
 

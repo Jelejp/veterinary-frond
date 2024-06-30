@@ -4,7 +4,7 @@ import InputSearch from './InputSearch';
 import axios from 'axios';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button } from 'reactstrap';
+import {services as predefinedServices} from '../utils/serviceList'
 
 const CardService = () => {
     const [services, setServices] = useState([]);
@@ -42,7 +42,17 @@ const CardService = () => {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                setServices(response.data);
+                const apiServices = response.data;
+                
+                const combinedServices = apiServices.map(service => {
+                    const predefinedService = predefinedServices.find(ps => ps.name === service.name);
+                    return {
+                        ...service,
+                        image: predefinedService ? predefinedService.image : '/assets/surgery.png'
+                    };
+                });
+
+                setServices(combinedServices);
             } catch (error) {
                 console.log("Error in API call:", error);
                 mensajeError();
@@ -84,9 +94,9 @@ const CardService = () => {
                             <p className="text-gray-600 mb-4">{service.description}</p>
                             <div className='flex justify-center w-full'>
                                 <Link to={`/auth/service/${service.id}`} >
-                                <button className="bg-[#80b3e2] hover:bg-[#6ca8e0] text-white font-bold py-2 px-4 rounded">
-                                    View Details
-                                </button>
+                                    <button className="bg-[#80b3e2] hover:bg-[#6ca8e0] text-white font-bold py-2 px-4 rounded">
+                                        View Details
+                                    </button>
                                 </Link>
                             </div>
                         </div>

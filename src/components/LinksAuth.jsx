@@ -1,42 +1,45 @@
 import React from 'react';
-import LinkTo from './LinkTo';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const LinksAuth = () => {
+    const location = useLocation();
+
     const activePage = {
-        Services: "/assets/services-active.png",
-        Veterinary: "/assets/veterinary-active.png",
-        Account: "/assets/user-active.png",
-        Logout: "/assets/logout-active.png" 
+        Services: "/auth/services",
+        Veterinary: "/auth/veterinary",
+        Account: "/auth/account",
+        Logout: "/"
     };
 
     const links = [
-        { text: "Services", to: "/auth/services", img: "/assets/services.png", activeIcon: activePage.Services },
-        { text: "Veterinary", to: "/auth/veterinary", img: "/assets/veterinary.png", activeIcon: activePage.Veterinary },
-        { text: "Account", to: "/auth/account", img: "/assets/user.png", activeIcon: activePage.Account },
-        { text: "Logout", to: "/", img: "/assets/logout.png", activeIcon: activePage.Logout },
+        { text: "Services", to: "/auth/services", img: "/assets/services.png", activeIcon: "/assets/services-active.png" },
+        { text: "Vet", to: "/auth/veterinary", img: "/assets/veterinary.png", activeIcon: "/assets/veterinary-active.png" },
+        { text: "Account", to: "/auth/account", img: "/assets/user.png", activeIcon: "/assets/user-active.png" },
+        { text: "Logout", to: "/", img: "/assets/logout.png", activeIcon: "/assets/logout-active.png" },
     ];
 
+    const isActive = (linkToCheck) => {
+        return location.pathname === linkToCheck;
+    };
+
     return (
-        <div className='flex flex-col md:flex-row justify-center items-center w-full h-full  '>
+
+          <div className='flex flex-col items-center lg:flex-row justify-start lg:justify-center w-full  md:h-[15vh] space-y-2 lg:space-y-0 lg:space-x-4 '>
             {links.map((anchor, id) => (
-                <Link
-                    key={id}
-                    href={anchor.to}
-                    className={`w-full md:w-auto text-center px-4  md:py-0 ${anchor.class}`}
-                >
-                    <LinkTo
-                        text={anchor.text}
-                        to={anchor.to}
-                        img={anchor.img}
-                        activeIcon={anchor.activeIcon}
-                    />
-                </Link>
+              <Link
+                key={id}
+                to={anchor.to}
+                className={`flex items-center space-y-1 space-x-3  lg:px-0 lg:py-0 text-center text-white font-medium hover:text-[#FAE7D5] lg:text-left ${anchor.text === "Vet" ? 'mr-8' : ''}`}
+              >
+                <img src={isActive(anchor.to) ? anchor.activeIcon : anchor.img} alt={anchor.text} className="h-6 w-6 lg:hidden" />
+                <span className="lg:flex items-center">
+                  <img src={isActive(anchor.to) ? anchor.activeIcon : anchor.img} alt={anchor.text} className="h-6 w-6 hidden lg:block mr-2" />
+                  <span>{anchor.text}</span>
+                </span>
+              </Link>
             ))}
-            {/* <a href="/" className="w-full md:w-auto text-red-500 font-bold hover:text-red-700 text-center md:pl-3 md:py-0">
-                Logout
-            </a> */}
-        </div>
+          </div>
+
     );
 };
 

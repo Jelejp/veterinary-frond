@@ -20,7 +20,7 @@ const HeaderAuth = () => {
                     </picture>
                     </Link>
                 </div>
-                <div className='md:hidden'>
+                <div className='lg:hidden'>
                     <button onClick={toggleMenu} className='text-white focus:outline-none'>
                         <img
                             className='w-6 h-6'
@@ -29,12 +29,12 @@ const HeaderAuth = () => {
                         />
                     </button>
                 </div>
-                <nav className='hidden md:flex md:items-center mt-[30px]'>
+                <nav className='hidden lg:flex lg:items-center mt-[10px]'>
                     <LinksAuth />
                 </nav>
             </header>
             {menuOpen && (
-                <nav className='md:hidden bg-[#8BA8C4] '>
+                <nav className='lg:hidden bg-[#8BA8C4] '>
                     <LinksAuth />
                 </nav>
             )}

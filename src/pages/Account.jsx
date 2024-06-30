@@ -1,3 +1,4 @@
+// Account.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ClientInfo from '../components/ClientInfo';
@@ -6,45 +7,41 @@ import InvoiceTable from '../components/InvoiceTable';
 import AppointmentClientTable from '../components/AppointmentClientTable';
 import AuthLayout from '../layout/AuthLayout';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 import AddPetModal from '../components/AddPetModal';
-
 import ChatbotAuth from '../ChatBotAuth';
 
-
 const Account = () => {
+    const token = useSelector(store => store.authReducer.token);
     const [client, setClient] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [appointments, setAppointments] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const fetchClientData = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api-veterinary/current', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setClient(response.data);
+        } catch (error) {
+            console.error("Error fetching client data:", error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Failed to fetch client data',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchClientData = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await axios.get('http://localhost:8080/api-veterinary/current', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                console.log(response.data);
-
-                setClient(response.data);
-                setAppointments(response.data.confirmedAppointments);
-            } catch (error) {
-                console.error("Error fetching client data:", error);
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Failed to fetch client data',
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                });
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchClientData();
-    }, []);
+    }, [token, isModalOpen]);
 
     const cancelAppointment = (id) => {
         Swal.fire({
@@ -85,10 +82,10 @@ const Account = () => {
             ...prevClient,
             pets: [...prevClient.pets, newPet]
         }));
+        setIsModalOpen(false);
     };
 
     return (
-
         <AuthLayout>
             <div className="container mx-auto px-4 py-8">
                 <div className="bg-white rounded-lg shadow-lg p-6">
@@ -98,11 +95,11 @@ const Account = () => {
                     <div className="mb-6">
                         <h2 className="text-xl font-bold mb-2">Pets:</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {client.pets.map(pet => (
-                                <PetCard key={pet.id} pet={pet} />
+                            {client.pets.map((pet, id) => (
+                                <PetCard key={id} image={pet.imageUrl} petName={pet.petName} species={pet.specie} breed={pet.breed} petAge={pet.petAge} petSize={pet.animalSize} specialTreatment={pet.specialTreatment} />
                             ))}
                         </div>
-                        <AddPetModal addPet={addPet}  />
+                        <AddPetModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} addPet={addPet} />
                     </div>
 
                     <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Invoices</h1>
@@ -111,11 +108,9 @@ const Account = () => {
                     <h1 className='text-3xl font-bold text-[#6ca8e0] p-2'>Appointments</h1>
                     <AppointmentClientTable appointments={client.confirmedAppointments} cancelAppointment={cancelAppointment} />
                 </div>
-
                 <ChatbotAuth />
             </div>
         </AuthLayout>
-
     );
 };
 
