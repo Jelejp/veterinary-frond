@@ -148,6 +148,10 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
     .filter(slot => slot.date === selectedDate)
     .sort((a, b) => a.availableHours.localeCompare(b.availableHours));
 
+  console.log(uniqueDates)
+  console.log(filteredSlots)
+  console.log(selectedDate)
+
   return (
     <Box as="form" onSubmit={(e) => e.preventDefault()} p={4} maxWidth="600px" mx="auto" borderWidth="1px" borderRadius="lg" overflow="hidden">
       <FormControl id="petSelect" mb={4}>
