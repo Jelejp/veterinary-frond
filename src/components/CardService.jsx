@@ -38,7 +38,7 @@ const CardService = () => {
 					}
 				});
 				setServices(response.data);
-				console.log(response.data);
+				// console.log(response.data);
 			} catch (error) {
 				console.log("Error in API call:", error);
 				mensajeError();

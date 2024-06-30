@@ -21,7 +21,7 @@ const EditServicePrice = () => {
           }
         });
 
-        console.log(response.data);
+        // console.log(response.data);
         setServices(response.data);
 
         if (response.data.length > 0) {
