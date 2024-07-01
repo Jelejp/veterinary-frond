@@ -16,12 +16,11 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 
   useEffect(() => {
     handleFetchAvailableSlots(serviceId);
-    console.log(serviceId);
   }, [serviceId]);
 
+  
   const handleFetchAvailableSlots = async (serviceId) => {
     try {
-      // const token = localStorage.getItem('token');
       const response = await axios.get(`https://mh-veterinary-api.onrender.com/api-veterinary/offerings/${serviceId}`, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -78,6 +77,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
       setSelectedSlotId(slot.id);
     }
   };
+  
 
   const handleCreateAppointment = () => {
     const appointmentData = {
@@ -98,10 +98,9 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
     }).then(async (confirmation) => {
-      console.log(appointmentData);
       if (confirmation.isConfirmed) {
         try {
-          // const token = localStorage.getItem('token');
+          console.log(appointmentData)
           const response = await axios.post('https://mh-veterinary-api.onrender.com/api-veterinary/appointments/new', appointmentData, {
             headers: {
               'Content-Type': 'application/json',
@@ -208,6 +207,10 @@ return (
           <Circle size="10px" bg="gray" mr={2} />
           <Text className='mt-[12px]'>Occupied</Text>
         </Flex>
+        <Flex alignItems="center">
+          <Circle size="10px" bg="red" mr={2} />
+          <Text className='mt-[12px]'>Selected</Text>
+        </Flex>
       </Flex>
       <SimpleGrid columns={[3, null, 4]} spacing={2} mb={2}>
         {filteredSlots.map(slot => (
@@ -216,7 +219,7 @@ return (
             onClick={() => handleSlotSelection(slot)}
             className={
               selectedSlotId === slot.id
-                ? 'bg-[#3b8bd5]'
+                ? 'bg-[#D32F2F]'
                 : slot.available
                 ? 'bg-[#6ca8e0]'
                 : 'bg-gray-700'
@@ -227,7 +230,7 @@ return (
             textAlign="center"
             cursor={slot.available ? 'pointer' : 'not-allowed'}
             opacity={slot.available ? 1 : 0.6}
-            fontSize="xs"
+            fontSize="xl"
           >
             <Text>{slot.availableHours}</Text>
           </Box>
