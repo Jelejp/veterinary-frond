@@ -5,6 +5,7 @@ import { login } from '../redux/actions/authActions'
 import axios from 'axios'
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import Spinner from './Spinner'
 
 const MainLogin = () => {
   const dispatch = useDispatch()
@@ -96,6 +97,9 @@ const MainLogin = () => {
     setPassword(event.target.value)
   }
 
+  if (loading) {
+		return <Spinner />;
+	}
 
   return (
     <div className='flex flex-col md:flex-row h-[100vh] lg:h-[100vh] md:h-[100vh] '>

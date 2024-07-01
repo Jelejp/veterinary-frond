@@ -5,9 +5,11 @@ import AuthLayout from '../layout/AuthLayout';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import Spinner from '../components/Spinner';
 
 const ServiceDetails = () => {
   
+  const[loading, setLoading] = useState(false);
   const { id } = useParams();
   const [service, setService] = useState(null);
   const [pets, setPets] = useState([]);
@@ -18,7 +20,7 @@ const ServiceDetails = () => {
 
   useEffect(() => {
     const fetchServiceDetails = async () => {
-      
+      setLoading(true);
       try {
         const serviceResponse = await axios.get(`https://mh-veterinary-api.onrender.com/api-veterinary/offerings/${id}`, {
           headers: {
@@ -45,6 +47,8 @@ const ServiceDetails = () => {
           confirmButtonText: 'Ok'
         });
       }
+
+      setLoading(false);
     };
 
     fetchServiceDetails();
@@ -85,7 +89,7 @@ const ServiceDetails = () => {
   };
 
   if (!service) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (

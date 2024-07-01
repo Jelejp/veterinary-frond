@@ -10,6 +10,7 @@ import AppointmentClientTable from '../components/AppointmentClientTable';
 import AddPetModal from '../components/AddPetModal';
 import AuthLayout from '../layout/AuthLayout';
 import ChatbotAuth from '../ChatBotAuth';
+import Spinner from '../components/Spinner';
 
 const Account = () => {
   const token = useSelector(store => store.authReducer.token);
@@ -21,7 +22,7 @@ const Account = () => {
     const fetchClientData = async () => {
 
       try {
-
+setLoading(true);
         const response = await axios.get('https://mh-veterinary-api.onrender.com/api-veterinary/current', {
           headers: {
             Authorization: `Bearer ${token}`
@@ -69,9 +70,9 @@ const Account = () => {
     });
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+	if (loading) {
+		return <Spinner />;
+	}
 
   if (!client) {
     return <div>No client data found.</div>;

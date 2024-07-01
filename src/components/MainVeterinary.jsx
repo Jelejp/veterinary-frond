@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import Spinner from './Spinner';
 
 
 const MainVeterinary = () => {
 
+const [loading, setLoading] = useState(false);
   const [veterinarians, setVeterinarians] = useState([]);
   const token = useSelector(state => state.authReducer.token);
 
   useEffect(() => {
     const fetchVeterinarians = async () => {
+
+      setLoading(true);
 
       try {
 
@@ -24,12 +28,16 @@ const MainVeterinary = () => {
       } catch (error) {
         console.error('Error al obtener la lista de veterinarios:', error);
       }
-
+      setLoading(false);
     };
 
     fetchVeterinarians();
 
   }, []);
+
+  if (loading) {
+		return <Spinner />;
+	}
 
   return (
     <div className='my-8'>

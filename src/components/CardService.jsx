@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 import InputSearch from './InputSearch';
 import { Button } from 'reactstrap';
+import Spinner from './Spinner';
 
 const CardService = () => {
 	const token = useSelector(store => store.authReducer.token)
@@ -58,13 +59,15 @@ const CardService = () => {
 	const filteredServices = services.filter((service) =>
 		service.name.toLowerCase().includes(searchTerm.toLowerCase())
 	);
+	if (loading) {
+		return <Spinner />;
+	}
 
 	return (
 		<div className="container mx-auto px-4 py-8">
 			<InputSearch searchTerm={searchTerm} onSearch={handleSearch} />
-			{loading ? (
-				<p className="text-center text-gray-500">Loading services...</p>
-			) : filteredServices.length === 0 ? (
+
+			{ filteredServices.length === 0 ? (
 				<p className="text-center text-gray-500">No services found with that name.</p>
 			) : (
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

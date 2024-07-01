@@ -113,7 +113,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 
           if (response.status === 201) {
             Swal.fire({
-              title: `Your appointment for ${serviceName} was successfully booked for ${selectedDate} at ${formatTime(dateTimeModal)}.`,
+              title: `Your appointment for ${serviceName} was successfully booked.`,
               icon: 'success'
             });
 
