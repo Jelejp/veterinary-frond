@@ -120,7 +120,7 @@ const MainLogin = () => {
           <button type='button' className='rounded-md max-h-14 font-bold py-2 px-4 bg-[#8BA8C4] m-2 h text-lg text-white cursor-pointer transition duration-200 ease-in-out hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-700 focus-visible:ring-offset-2 active:scale-95 my-4' onClick={handleLogin}>LOG IN</button>
         </form>
       </article>
-      <article className='article-bg md:w-1/2 flex h-full flex-col justify-center items-center '>
+      <article className='article-bg md:w-1/2 flex flex-col justify-center items-center '>
         <div className='article-content text-white flex flex-col gap-14 justify-center items-center'>
           <h2 className='font-bold text-gray-700 text-3xl'>New at VetNova?</h2>
           <p className='text-gray-700 text-center text-lg'>Discover the benefits of being part of VetNova</p>

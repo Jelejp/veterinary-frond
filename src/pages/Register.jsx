@@ -5,7 +5,7 @@ import MainRegister from '../components/MainRegister'
 const Register = () => {
     
     return (
-        <div className='w-full h-screen overflow-y-hidden'>
+        <div className='w-full min-h-screen'>
             <div>
                 <PublicNav />
             </div>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
+import chatbotIcon from '/assets/chatbot.png';
 
 const steps = [
   {
@@ -113,21 +114,26 @@ const theme = {
 };
 
 const ChatbotAuth = () => {
-  const [isOpen, setIsOpen] = useState(true); // Inicia el chatbot abierto
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <div className="fixed-chatbot">
+    <div className={`fixed-chatbot ${isOpen ? 'chatbot-open' : ''}`}>
+      <div className="chatbot-icon-container">
+        <img src={chatbotIcon} alt="Chatbot Icon" className="chatbot-icon" />
+      </div>
       <button onClick={toggleChatbot} className="chatbot-button">
-        {isOpen ? 'Cerrar' : 'ChatBot'}
+        {isOpen ? '✕' : 'ChatBot'}
       </button>
       {isOpen && (
-        <ThemeProvider theme={theme}>
-          <ChatBot steps={steps} />
-        </ThemeProvider>
+        <div className="chatbot-container">
+          <ThemeProvider theme={theme}>
+            <ChatBot steps={steps} />
+          </ThemeProvider>
+        </div>
       )}
     </div>
   );

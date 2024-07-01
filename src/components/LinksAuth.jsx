@@ -47,7 +47,10 @@ const LinksAuth = () => {
 								>
 									<Link
 										to={anchor.to}
-										className='flex items-center space-x-2 text-white font-medium hover:text-[#FAE7D5]'
+										className={`flex items-center space-x-2 font-medium 
+											${isActive(anchor.to) ? 'bg-[#b0b0b0] text-white' : 'text-white hover:text-[#FAE7D5]'}
+											rounded-md p-2 transition-colors
+											${anchor.text === 'Vets' ? 'mr-9' : ''}`}
 										onClick={() => setMenuOpen(false)}
 									>
 										<img
@@ -69,7 +72,9 @@ const LinksAuth = () => {
 					<Link
 						key={id}
 						to={anchor.to}
-						className={`flex items-center space-y-1 space-x-3 lg:px-0 lg:py-0 text-center text-white font-medium hover:text-[#FAE7D5] lg:text-left ${anchor.text}`}
+						className={`flex items-center space-y-1 space-x-3 lg:px-0 lg:py-0 text-center font-medium 
+							${isActive(anchor.to) ? 'bg-[#b0b0b0] text-white' : 'text-white hover:text-[#FAE7D5]'}
+							rounded-md p-1 transition-colors lg:text-left ${anchor.text}`}
 					>
 						<img
 							src={isActive(anchor.to) ? anchor.activeIcon : anchor.img}
