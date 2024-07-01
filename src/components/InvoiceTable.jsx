@@ -21,6 +21,7 @@ const InvoiceTable = () => {
 			});
 
             const account = response.data.account;
+            console.log("🚀 ~ fetchInvoices ~ response.data.account;:", response.data.account)
             if (account && account.chargedInvoices) {
                 setInvoices(account.chargedInvoices);
             } else {

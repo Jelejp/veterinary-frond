@@ -4,6 +4,9 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
 
+import { format, parseISO } from 'date-fns';
+import { toZonedTime, format as formatTz } from 'date-fns-tz';
+
 const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets, handlePetChange }) => {
   const [dateTimeModal, setDateTimeModal] = useState('');
   const [dateTime, setDateTime] = useState('');
@@ -28,18 +31,17 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
         }
       });
       setAvailableSlots(response.data.availableSlots);
-      console.log("🚀 ~ handleFetchAvailableSlots ~ response.data.availableSlots:", response.data.availableSlots)
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleSlotSelection = (slot) => {
-    console.log("🚀 ~ handleSlotSelection ~ slot:", slot)
     if (slot.available) {
       // Verifica que `slot.date` y `slot.availableHours` son cadenas válidas
       const localDateTimetoPost = new Date(`${slot.date}T${slot.availableHours}:00`);
-      setDateTime(localDateTimetoPost.toISOString())
+      DateComponent(localDateTimetoPost)
+      setDateTime(DateComponent(localDateTimetoPost))
       if (!slot.date || !slot.availableHours) {
         console.error('Invalid slot data:', slot);
         return;
@@ -64,7 +66,6 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
       // Construye la cadena de fecha y hora en formato correcto
       const dateTimeString = `${slot.date}T${availableHours24}:00`;
   
-      console.log("🚀 ~ handleSlotSelection ~ dateTimeString:", dateTimeString)
       // Verifica si la cadena de fecha y hora es válida
       const localDateTime = new Date(dateTimeString);
       if (isNaN(localDateTime.getTime())) {
@@ -74,7 +75,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
   
       // Formatea `LocalDateTime` para enviar al backend
       const formattedDateTime = localDateTime.toISOString().slice(0, 19); 
-  
+      
       console.log(`Formatted Local DateTime: ${formattedDateTime}`);
       setDateTimeModal(availableHours24);
       setSelectedSlotId(slot.id);
@@ -91,7 +92,6 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
       offeringId: parseInt(serviceId, 10),
       slotId: selectedSlotId,
     };
-    console.log("🚀 ~ handleCreateAppointment ~ appointmentData:", appointmentData)
 
     Swal.fire({
       title: 'Confirm Appointment',
@@ -138,11 +138,27 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
     });
   };
 
-  const formatDate = (dateString) => {
-    console.log("🚀 ~ formatDate ~ dateString:", dateString)
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+  // const formatDate = (dateString) => {
+  //   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
+  //   return new Date(dateString).toLocaleDateString('en-US', options);
+  // };
+
+
+
+  const DateComponent = (fechaAFormatear) => {
+    // Definir la fecha y hora en la zona horaria de Argentina
+    const dateInArgentina = new Date(fechaAFormatear); // Hora local en Argentina
+    
+    // Convertir la fecha a UTC
+    const timeZone = 'America/Argentina/Buenos_Aires';
+    const dateInUTC = toZonedTime(dateInArgentina, timeZone);
+  
+    // Formatear la fecha en UTC en el formato ISO
+    const isoStringArgentina = format(dateInUTC, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+    return isoStringArgentina
   };
+
 
   const formatTime = (dateString) => {
     const options = { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'America/Argentina/Buenos_Aires' };
@@ -156,10 +172,8 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
         date: slot.date
     };
 }).sort((a, b) => new Date(a.date) - new Date(b.date));
-  console.log("🚀 ~ selectDate ~ selectDate:", selectDate)
 
   const uniqueDates = [...selectDate.reduce((map, slot) => map.set(slot.date, slot), new Map()).values()];
-  console.log("🚀 ~ AppointmentTable ~ uniqueDates:", uniqueDates)
   
   const handleChangeSelectDate = ({target}) => {
   setSelectedDate(target.value)
