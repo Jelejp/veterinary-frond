@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
 
 const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets, handlePetChange }) => {
+  const [dateTimeModal, setDateTimeModal] = useState('');
   const [dateTime, setDateTime] = useState('');
   const [description, setDescription] = useState('');
   const [selectedPetId, setSelectedPetId] = useState('');
@@ -37,6 +38,8 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
     console.log("🚀 ~ handleSlotSelection ~ slot:", slot)
     if (slot.available) {
       // Verifica que `slot.date` y `slot.availableHours` son cadenas válidas
+      const localDateTimetoPost = new Date(`${slot.date}T${slot.availableHours}:00`);
+      setDateTime(localDateTimetoPost.toISOString())
       if (!slot.date || !slot.availableHours) {
         console.error('Invalid slot data:', slot);
         return;
@@ -73,7 +76,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
       const formattedDateTime = localDateTime.toISOString().slice(0, 19); 
   
       console.log(`Formatted Local DateTime: ${formattedDateTime}`);
-      setDateTime(availableHours24);
+      setDateTimeModal(availableHours24);
       setSelectedSlotId(slot.id);
     }
   };
@@ -92,7 +95,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 
     Swal.fire({
       title: 'Confirm Appointment',
-      html: `Are you sure you want to book this appointment?<br/><br/>Date: ${selectedDate} at ${dateTime}<br/>Description: ${description}`,
+      html: `Are you sure you want to book this appointment?<br/><br/>Date: ${selectedDate} at ${dateTimeModal}<br/>Description: ${description}`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Confirm',
@@ -110,13 +113,13 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 
           if (response.status === 201) {
             Swal.fire({
-              title: `Your appointment for ${serviceName} was successfully booked for ${selectedDate} at ${formatTime(dateTime)}.`,
+              title: `Your appointment for ${serviceName} was successfully booked for ${selectedDate} at ${formatTime(dateTimeModal)}.`,
               icon: 'success'
             });
 
-            setDateTime('');
+            setDateTimeModal('');
             setDescription('');
-            setSelectedAppointment(dateTime);
+            setSelectedAppointment(dateTimeModal);
 
             await handleFetchAvailableSlots(serviceId);
           } else {
