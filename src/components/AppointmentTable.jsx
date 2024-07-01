@@ -87,7 +87,7 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
     const appointmentData = {
       dateTime,
       description,
-      status: 'SCHEDULED',
+      status: 'CONFIRMED',
       petId: parseInt(selectedPetId, 10),
       offeringId: parseInt(serviceId, 10),
       slotId: selectedSlotId,
