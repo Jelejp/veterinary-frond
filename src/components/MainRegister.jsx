@@ -61,7 +61,7 @@ const MainRegister = () => {
         const registerDTO = { firstName, lastName, email, password, phone: phoneNumber };
 
         try {
-            const response = await axios.post('http://localhost:8080/api-veterinary/register', registerDTO);
+            const response = await axios.post('https://mh-veterinary-api.onrender.com/api-veterinary/register', registerDTO);
             if (response.status === 201) {
                 toast.success('Account created successfully', {
                     position: "top-center",

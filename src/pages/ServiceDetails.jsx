@@ -20,29 +20,21 @@ const ServiceDetails = () => {
     const fetchServiceDetails = async () => {
       
       try {
-        const serviceResponse = await axios.get(`http://localhost:8080/api-veterinary/offerings/${id}`, {
+        const serviceResponse = await axios.get(`https://mh-veterinary-api.onrender.com/api-veterinary/offerings/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
-        const clientResponse = await axios.get('http://localhost:8080/api-veterinary/current', {
+        const clientResponse = await axios.get('https://mh-veterinary-api.onrender.com/api-veterinary/current', {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
-        const apiService = serviceResponse.data;
-        const predefinedService = predefinedServices.find(ps => ps.name === apiService.name);
-
-        const combinedService = {
-          ...apiService,
-          image: predefinedService ? predefinedService.image : '/assets/surgery.png' // Ruta por defecto si no se encuentra
-        };
-
-        setService(combinedService);
+        setService(serviceResponse.data);
         setPets(clientResponse.data.pets);
-        setCalculatedPrice(combinedService.price);
+        setCalculatedPrice(serviceResponse.data.price);
 
       } catch (error) {
         console.error("Error fetching data:", error);

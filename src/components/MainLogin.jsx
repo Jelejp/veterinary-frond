@@ -53,11 +53,11 @@ const MainLogin = () => {
 
     try {
 
-      const response = await axios.post('http://localhost:8080/api-veterinary/login', user);
+      const response = await axios.post('https://mh-veterinary-api.onrender.com/api-veterinary/login', user);
       let token = response.data
       console.log(response.data);
 
-      const responseCurrentClient = await axios.get("http://localhost:8080/api-veterinary/current", {
+      const responseCurrentClient = await axios.get("https://mh-veterinary-api.onrender.com/api-veterinary/current", {
         headers: {
           Authorization: `Bearer ${token}`
         }

@@ -15,7 +15,7 @@ const EditServicePrice = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api-veterinary/offerings/', {
+        const response = await axios.get('https://mh-veterinary-api.onrender.com/api-veterinary/offerings/', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -65,7 +65,7 @@ const EditServicePrice = () => {
     try {
 
       console.log(updatedService)
-      const response = await axios.put(`http://localhost:8080/api-veterinary/offerings/update-price`, updatedService, {
+      const response = await axios.put(`https://mh-veterinary-api.onrender.com/api-veterinary/offerings/update-price`, updatedService, {
         headers: {
           Authorization: `Bearer ${token}`
         }

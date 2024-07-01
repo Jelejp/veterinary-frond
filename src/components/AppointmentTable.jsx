@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Select, SimpleGrid, Flex, Text, Circle } from '@chakra-ui/react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets, handlePetChange }) => {
   const [dateTime, setDateTime] = useState('');
@@ -15,12 +16,13 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
 
   useEffect(() => {
     handleFetchAvailableSlots(serviceId);
+    console.log(serviceId);
   }, [serviceId]);
 
   const handleFetchAvailableSlots = async (serviceId) => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(`http://localhost:8080/api-veterinary/offerings/${serviceId}`, {
+      // const token = localStorage.getItem('token');
+      const response = await axios.get(`https://mh-veterinary-api.onrender.com/api-veterinary/offerings/${serviceId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -96,10 +98,11 @@ const AppointmentTable = ({ setSelectedAppointment, serviceId, serviceName, pets
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
     }).then(async (confirmation) => {
+      console.log(appointmentData);
       if (confirmation.isConfirmed) {
         try {
-          const token = localStorage.getItem('token');
-          const response = await axios.post('http://localhost:8080/api-veterinary/appointments/new', appointmentData, {
+          // const token = localStorage.getItem('token');
+          const response = await axios.post('https://mh-veterinary-api.onrender.com/api-veterinary/appointments/new', appointmentData, {
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`

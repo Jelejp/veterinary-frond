@@ -13,7 +13,7 @@ const MainVeterinary = () => {
 
       try {
 
-        const response = await axios.get('http://localhost:8080/api-veterinarian/veterinarians/', {
+        const response = await axios.get('https://mh-veterinary-api.onrender.com/api-veterinarian/veterinarians/', {
           headers: {
             Authorization: `Bearer ${token}`
           }

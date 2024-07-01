@@ -55,7 +55,7 @@ const AddPetModal = ({ isModalOpen, setIsModalOpen }) => {
             imageUrl: image
         };
         try {
-            const response = await axios.post('http://localhost:8080/api-veterinary/pets/new', petData, {
+            const response = await axios.post('https://mh-veterinary-api.onrender.com/api-veterinary/pets/new', petData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }

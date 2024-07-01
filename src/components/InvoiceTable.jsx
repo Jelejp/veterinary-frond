@@ -14,7 +14,7 @@ const InvoiceTable = () => {
 
 	const fetchInvoices = async () => {
 		try {
-			const response = await axios.get('http://localhost:8080/api-veterinary/current', {
+			const response = await axios.get('https://mh-veterinary-api.onrender.com/api-veterinary/current', {
 				headers: {
 					Authorization: `Bearer ${token}`
 				}

@@ -33,7 +33,7 @@ const NewServiceForm = () => {
 		
 		try {
 			console.log(formData)
-			const response = await axios.post('http://localhost:8080/api-veterinary/offerings/create', formData, {
+			const response = await axios.post('https://mh-veterinary-api.onrender.com/api-veterinary/offerings/create', formData, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				}

@@ -29,7 +29,7 @@ const NewVeterinarian = () => {
 
     try {
       console.log(veterinarianData);
-      const response = await axios.post('http://localhost:8080/api-veterinarian/veterinarians/new', veterinarianData,
+      const response = await axios.post('https://mh-veterinary-api.onrender.com/api-veterinarian/veterinarians/new', veterinarianData,
         {
           headers: {
             'Authorization': `Bearer ${token}`,
